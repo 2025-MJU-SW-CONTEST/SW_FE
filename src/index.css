@@ -2,6 +2,7 @@
 
 @theme{
     --min-screen-size: 363px;
+    --primary: #FFFFFF;
 }
 
 @layer components {
