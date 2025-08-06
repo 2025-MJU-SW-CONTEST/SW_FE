@@ -1,10 +1,79 @@
 @import "tailwindcss";
 
-@theme{
-    --min-screen-size: 363px;
-    --primary: #FFFFFF;
+@layer base {
+    *{
+        font-family: "Pretendard Variable", Pretendard, sans-serif;
+    }
 }
 
-@layer components {
+@theme{
+    --min-screen-size: 363px;
 
+    --leading-lineHeight-030: 30px;
+    --leading-lineHeight-020: 20px;
+
+    --text-020: 20px;
+    --text-016: 16px;
+
+    --font-weight-bold: 700;
+
+    --blue-900: #1E2C6C;
+    --blue-800: #2F3FA0;
+    --blue-700: #4356D8;
+    --blue-600: #4F67E8;
+    --blue-500: #5A77FF;
+    --blue-400: #7C95FF;
+    --blue-300: #A9B8FF;
+    --blue-200: #CAD5FF;
+    --blue-100: #E7ECFF;
+    --blue-50: #F3F5FF;
+
+    --lavender-900: #4A2A7A;
+    --lavender-800: #683A9E;
+    --lavender-700: #8A5DDE;
+    --lavender-600: #A987F4;
+    --lavender-500: #BFA1FA;
+    --lavender-400: #C5AFFF;
+    --lavender-300: #C9B7FF;
+    --lavender-200: #D9CFFF;
+    --lavender-100: #EEE7FF;
+    --lavender-50: #F9F6FF;
+
+    --gray-900: #1C1C1E;
+    --gray-800: #2C2C2C;
+    --gray-700: #4B4B4D;
+    --gray-600: #6C6C70;
+    --gray-500: #A0A0A3;
+    --gray-400: #C0C0C3;
+    --gray-300: #D2D2D7;
+    --gray-200: #E4E4E7;
+    --gray-100: #F5F5F7;
+    --gray-50: #FFFFFF;
+
+    --color-primary-500: var(--blue-500);
+    --color-primary-700: var(--blue-700);
+    --color-primary-900: var(--blue-900);
+
+    --color-secondary-300: var(--lavender-300);
+
+    --color-grayscale-800: var(--gray-800);
+    --color-grayscale-700: var(--gray-700);
+    --color-grayscale-500: var(--gray-500);
+    --color-grayscale-400: var(--gray-400);
+}
+
+@utility pretendard_bold {
+    @apply font-bold leading-lineHeight-030 text-020 text-grayscale-800;
+}
+
+@utility pretendard_regular {
+    @apply font-medium leading-lineHeight-020 text-016 text-grayscale-700;
+}
+
+@utility pretendard_disabled_400 {
+    @apply font-medium leading-lineHeight-020 text-016 text-grayscale-400;
+}
+
+@utility pretendard_disabled_500 {
+    @apply font-medium leading-lineHeight-020 text-016 text-grayscale-500;
 }
