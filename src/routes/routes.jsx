@@ -16,6 +16,10 @@ const routes = [
     element: <RootLayout/>,
     children: [
       {
+        index: true,
+        element: <Home />,
+      },
+      {
         index: pagePath.ONBOARDING,
         element: <Onboarding />,
       },
@@ -28,10 +32,6 @@ const routes = [
         element: <Register />,
       },
       {
-        index: pagePath.HOME,
-        element: <Home />,
-      },
-      {
         path: pagePath.ARTICLE,
         element: <Article/>
       },
@@ -40,7 +40,7 @@ const routes = [
         element: <AIChat/>
       },
       {
-        path: pagePath.ARTICLE,
+        path: pagePath.MYPAGE,
         element: <Mypage/>
       },
     ]

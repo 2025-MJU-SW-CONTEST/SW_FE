@@ -16,7 +16,14 @@
     --text-020: 20px;
     --text-018: 18px;
     --text-016: 16px;
+    --text-014: 14px;
+    --text-012: 12px;
 
+    --gap-005: 5px;
+
+    --padding-020: 20px;
+
+    --radius-003: 3px;
     --radius-006: 6px;
 
     --blue-900: #1E2C6C;
@@ -74,6 +81,7 @@
     --color-secondary-300: var(--lavender-300);
     --color-secondary-200: var(--lavender-200);
     --color-secondary-100: var(--lavender-100);
+    --color-secondary-50: var(--lavender-50);
 
     --color-font-900: var(--gray-900);
     --color-font-800: var(--gray-800);
@@ -93,6 +101,10 @@
 
 @utility pretendard_regular {
     @apply font-medium leading-lineHeight-020 text-016 text-font-700;
+}
+
+@utility pretendard_mediun {
+    @apply font-medium leading-lineHeight-030 text-012 text-font-400;
 }
 
 @utility pretendard_disabled_400 {
