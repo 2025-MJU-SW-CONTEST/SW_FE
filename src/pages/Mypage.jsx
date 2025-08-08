@@ -1,13 +1,12 @@
-import React from 'react';
 import BottomNavigation from "@components/common/BottomNavigation.jsx";
 
-const Home = () => {
-
+const Mypage = () => {
   return (
-    <div className="">
+    <div>
+      <p>마이페이지</p>
       <BottomNavigation/>
     </div>
   );
 };
 
-export default Home;
+export default Mypage;

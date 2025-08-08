@@ -1,3 +1,9 @@
 export const pagePath = {
-  HOME: "home"
+  ONBOARDING: "onboarding",
+  LOGIN: "login",
+  REGISTER: "register",
+  HOME: "home",
+  AICHAT: "aichat",
+  ARTICLE: "article",
+  MYPAGE: "mypage",
 }
