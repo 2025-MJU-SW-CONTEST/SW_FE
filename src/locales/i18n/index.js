@@ -7,6 +7,8 @@ import koDescription from '@locales/ko/description.json';
 import koOnboarding from '@locales/ko/onboarding.json';
 import koPlaceholder from '@locales/ko/placeholder.json';
 import koTitle from '@locales/ko/title.json';
+import koPopup from '@locales/ko/popup.json';
+import koList from '@locales/ko/list.json';
 
 i18n
   .use(initReactI18next)
@@ -19,6 +21,8 @@ i18n
         onboarding: koOnboarding,
         placeholder: koPlaceholder,
         title: koTitle,
+        popup: koPopup,
+        list: koList
       },
     },
     lng: 'ko', // 기본 언어
