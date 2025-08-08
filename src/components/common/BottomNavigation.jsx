@@ -11,7 +11,7 @@ const BottomNavigation = () => {
   const { t } = useTranslation(["navigation"]);
   return (
     <div className="fixed bottom-0 left-0 right-0">
-      <div className="flex justify-center items-center bg-secondary-50 w-full max-w-(--min-screen-size) mx-auto">
+      <div className="flex justify-center items-center bg-secondary-50 w-full max-w-(--min-screen-size) mx-auto ">
         <div className="w-full flex items-center justify-center gap-8 h-full">
           <BottomNavigationItem
             Icon={HomeIcon}
