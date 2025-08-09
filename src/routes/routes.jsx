@@ -11,6 +11,7 @@ import Home from "@pages/Home.jsx";
 import AIChat from "@pages/AIChat.jsx";
 import Article from "@pages/Article.jsx";
 import Mypage from "@pages/Mypage.jsx";
+import OAuthCallback from "@/pages/OAuthCallback";
 
 const routes = [
   {
@@ -41,6 +42,10 @@ const routes = [
         path: pagePath.MYPAGE,
         element: <Mypage />,
       },
+      {
+        path: pagePath.OAUTH_CALLBACK_KAKAO,
+        element: <OAuthCallback />,
+      },
     ],
   },
   {
@@ -51,8 +56,8 @@ const routes = [
         index: true,
         element: <Home />,
       },
-    ]
-  }
+    ],
+  },
 ];
 
 export default routes;
