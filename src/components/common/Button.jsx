@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 
-const Button = ({text="ddd", type, className, onClick}) => {
+const Button = ({text, type, className, onClick}) => {
   const buttonClass = clsx(
     "font-family-pretendard w-full h-[50px] rounded-006 cursor-pointer leading-loose text-016",
     {

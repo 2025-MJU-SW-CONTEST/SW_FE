@@ -1,9 +1,47 @@
-import React from 'react';
+import TextField from "@components/common/TextField.jsx";
+import Button from "@components/common/Button.jsx";
+import {useTranslation} from "react-i18next";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
+  const [value, setValue] = useState("");
+  const navigate = useNavigate();
+
+  const { t } = useTranslation(["title", "description","placeholder", "button"]);
+
+  const handleCompleteButton = () => {
+    localStorage.setItem("isLogin", true);
+    localStorage.setItem("accessToken", "filmmateo02030404");
+    navigate("/");
+  }
+
   return (
-    <div>
-      
+    <div className="px-020">
+      <p className="pretendard_bold mt-[153px] pl-022">
+        <span className="text-primary">{t("title:title_service")}</span>
+        {t("title:title_welcome")}
+      </p>
+      <p className="font-famliy-pretendard text-018 text-font-700 mt-3.5 pl-022">{t("description:description_nickname")}</p>
+      <div className="px-022 mt-[35px]">
+        <TextField
+          placeholder={t("placeholder:placeholder_nickname")}
+          value={value}
+          setValue={(value) => {
+            if(value.length <= 10){
+              setValue(value);
+            }
+          }}
+        />
+      </div>
+      <div className="px-[29px]">
+        <Button
+          text={t("button:button_complete")}
+          type="emphasis"
+          onClick={handleCompleteButton}
+          className="mt-[404px] mb-[92px]"
+        />
+      </div>
     </div>
   );
 };
