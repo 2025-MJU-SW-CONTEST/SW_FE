@@ -20,13 +20,19 @@
     --text-012: 12px;
 
     --gap-005: 5px;
+    --gap-007: 7px;
+    --gap-013: 13px;
 
+    --padding-010: 10px;
+    --padding-012: 12px;
     --padding-016: 16px;
     --padding-020: 20px;
     --padding-022: 22px;
 
     --radius-003: 3px;
     --radius-006: 6px;
+    --radius-010: 10px;
+    --radius-020: 20px;
 
     --blue-900: #1E2C6C;
     --blue-800: #2F3FA0;
@@ -98,14 +104,14 @@
 }
 
 @utility pretendard_bold {
-    @apply font-bold leading-lineHeight-030 text-020 text-font-800;
+    @apply font-bold leading-lineHeight-030 text-024 text-font-800;
 }
 
 @utility pretendard_regular {
-    @apply font-medium leading-lineHeight-020 text-016 text-font-700;
+    @apply font-normal leading-lineHeight-020 text-016 text-font-700;
 }
 
-@utility pretendard_mediun {
+@utility pretendard_medium {
     @apply font-medium leading-lineHeight-030 text-012 text-font-400;
 }
 
