@@ -9,8 +9,8 @@ const ProtectedRoute = () => {
   }
 
   return (
-    <div className="flex justify-center w-dvw h-dvh">
-      <div className="w-(--min-screen-size) h-full">
+    <div className="flex justify-center w-dvw h-dvh bg-black">
+      <div className="w-(--min-screen-size) h-full bg-white">
         <Outlet />
       </div>
     </div>
