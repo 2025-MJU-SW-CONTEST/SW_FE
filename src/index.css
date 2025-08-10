@@ -6,113 +6,139 @@
   }
 }
 
-@theme{
-    --min-screen-size: 393px;
+@layer utilities {
+  .shadow-modal {
+    box-shadow: 0 1px 10px #b1b0ff80;
+  }
 
-    --leading-lineHeight-030: 30px;
-    --leading-lineHeight-020: 20px;
+  .shadow-custom-drop {
+    filter: drop-shadow(0 4px 8px rgba(227, 227, 227, 1));
+  }
 
-    --text-024: 24px;
-    --text-020: 20px;
-    --text-018: 18px;
-    --text-016: 16px;
-    --text-014: 14px;
-    --text-012: 12px;
+  .shadow-kebab-button {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3),
+      0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  }
 
-    --gap-005: 5px;
-    --gap-007: 7px;
-    --gap-013: 13px;
+  .shadow-toast {
+    box-shadow: 0 2px 10px 0 rgba(177, 176, 255, 0.5);
+  }
+}
 
-    --padding-010: 10px;
-    --padding-012: 12px;
-    --padding-016: 16px;
-    --padding-020: 20px;
-    --padding-022: 22px;
+@theme {
+  --min-screen-size: 393px;
 
-    --radius-003: 3px;
-    --radius-006: 6px;
-    --radius-010: 10px;
-    --radius-020: 20px;
+  --leading-lineHeight-030: 30px;
+  --leading-lineHeight-020: 20px;
 
-    --blue-900: #1E2C6C;
-    --blue-800: #2F3FA0;
-    --blue-700: #4356D8;
-    --blue-600: #4F67E8;
-    --blue-500: #5A77FF;
-    --blue-400: #7C95FF;
-    --blue-300: #A9B8FF;
-    --blue-200: #CAD5FF;
-    --blue-100: #E7ECFF;
-    --blue-50: #F3F5FF;
+  --text-024: 24px;
+  --text-020: 20px;
+  --text-018: 18px;
+  --text-016: 16px;
+  --text-014: 14px;
+  --text-012: 12px;
 
-    --lavender-900: #4A2A7A;
-    --lavender-800: #683A9E;
-    --lavender-700: #8A5DDE;
-    --lavender-600: #A987F4;
-    --lavender-500: #BFA1FA;
-    --lavender-400: #C5AFFF;
-    --lavender-300: #C9B7FF;
-    --lavender-200: #D9CFFF;
-    --lavender-100: #EEE7FF;
-    --lavender-50: #F9F6FF;
+  --gap-005: 5px;
+  --gap-007: 7px;
+  --gap-013: 13px;
 
-    --gray-900: #1C1C1E;
-    --gray-800: #2C2C2C;
-    --gray-700: #4B4B4D;
-    --gray-600: #6C6C70;
-    --gray-500: #A0A0A3;
-    --gray-400: #C0C0C3;
-    --gray-300: #D2D2D7;
-    --gray-200: #E4E4E7;
-    --gray-100: #F5F5F7;
-    --gray-50: #FFFFFF;
+  --padding-010: 10px;
+  --padding-012: 12px;
+  --padding-016: 16px;
+  --padding-020: 20px;
+  --padding-022: 22px;
 
-    --color-primary: var(--blue-500);
-    --color-primary-900: var(--blue-900);
-    --color-primary-800: var(--blue-800);
-    --color-primary-700: var(--blue-700);
-    --color-primary-600: var(--blue-600);
-    --color-primary-500: var(--blue-500);
-    --color-primary-400: var(--blue-400);
-    --color-primary-300: var(--blue-300);
-    --color-primary-200: var(--blue-200);
-    --color-primary-100: var(--blue-100);
-    --color-primary-50: var(--blue-50);
+  --radius-003: 3px;
+  --radius-006: 6px;
+  --radius-010: 10px;
+  --radius-020: 20px;
+  --radius-028: 28px;
 
-    --color-secondary: var(--lavender-300);
-    --color-secondary-900: var(--lavender-900);
-    --color-secondary-800: var(--lavender-800);
-    --color-secondary-700: var(--lavender-700);
-    --color-secondary-600: var(--lavender-600);
-    --color-secondary-500: var(--lavender-500);
-    --color-secondary-400: var(--lavender-400);
-    --color-secondary-300: var(--lavender-300);
-    --color-secondary-200: var(--lavender-200);
-    --color-secondary-100: var(--lavender-100);
-    --color-secondary-50: var(--lavender-50);
+  --blue-900: #1e2c6c;
+  --blue-800: #2f3fa0;
+  --blue-700: #4356d8;
+  --blue-600: #4f67e8;
+  --blue-500: #5a77ff;
+  --blue-400: #7c95ff;
+  --blue-300: #a9b8ff;
+  --blue-200: #cad5ff;
+  --blue-100: #e7ecff;
+  --blue-50: #f3f5ff;
 
-    --color-font-900: var(--gray-900);
-    --color-font-800: var(--gray-800);
-    --color-font-700: var(--gray-700);
-    --color-font-600: var(--gray-600);
-    --color-font-500: var(--gray-500);
-    --color-font-400: var(--gray-400);
-    --color-font-300: var(--gray-300);
-    --color-font-200: var(--gray-200);
-    --color-font-100: var(--gray-100);
-    --color-font-50: var(--gray-50);
+  --lavender-900: #4a2a7a;
+  --lavender-800: #683a9e;
+  --lavender-700: #8a5dde;
+  --lavender-600: #a987f4;
+  --lavender-500: #bfa1fa;
+  --lavender-400: #c5afff;
+  --lavender-300: #c9b7ff;
+  --lavender-200: #d9cfff;
+  --lavender-100: #eee7ff;
+  --lavender-50: #f9f6ff;
+
+  --gray-900: #1c1c1e;
+  --gray-800: #2c2c2c;
+  --gray-700: #4b4b4d;
+  --gray-600: #6c6c70;
+  --gray-500: #a0a0a3;
+  --gray-400: #c0c0c3;
+  --gray-300: #d2d2d7;
+  --gray-200: #e4e4e7;
+  --gray-100: #f5f5f7;
+  --gray-50: #ffffff;
+
+  --red-error-font: #e10000;
+  --red-error: #ff3737;
+
+  --color-primary: var(--blue-500);
+  --color-primary-900: var(--blue-900);
+  --color-primary-800: var(--blue-800);
+  --color-primary-700: var(--blue-700);
+  --color-primary-600: var(--blue-600);
+  --color-primary-500: var(--blue-500);
+  --color-primary-400: var(--blue-400);
+  --color-primary-300: var(--blue-300);
+  --color-primary-200: var(--blue-200);
+  --color-primary-100: var(--blue-100);
+  --color-primary-50: var(--blue-50);
+
+  --color-secondary: var(--lavender-300);
+  --color-secondary-900: var(--lavender-900);
+  --color-secondary-800: var(--lavender-800);
+  --color-secondary-700: var(--lavender-700);
+  --color-secondary-600: var(--lavender-600);
+  --color-secondary-500: var(--lavender-500);
+  --color-secondary-400: var(--lavender-400);
+  --color-secondary-300: var(--lavender-300);
+  --color-secondary-200: var(--lavender-200);
+  --color-secondary-100: var(--lavender-100);
+  --color-secondary-50: var(--lavender-50);
+
+  --color-font-900: var(--gray-900);
+  --color-font-800: var(--gray-800);
+  --color-font-700: var(--gray-700);
+  --color-font-600: var(--gray-600);
+  --color-font-500: var(--gray-500);
+  --color-font-400: var(--gray-400);
+  --color-font-300: var(--gray-300);
+  --color-font-200: var(--gray-200);
+  --color-font-100: var(--gray-100);
+  --color-font-50: var(--gray-50);
+
+  --color-error-font: var(--red-error-font);
+  --color-error: var(--red-error);
 }
 
 @utility pretendard_bold {
-    @apply font-bold leading-lineHeight-030 text-024 text-font-800;
+  @apply font-bold leading-lineHeight-030 text-024 text-font-800;
 }
 
 @utility pretendard_regular {
-    @apply font-normal leading-lineHeight-020 text-016 text-font-700;
+  @apply font-normal leading-lineHeight-020 text-016 text-font-700;
 }
 
 @utility pretendard_medium {
-    @apply font-medium leading-lineHeight-030 text-012 text-font-400;
+  @apply font-medium leading-lineHeight-030 text-012 text-font-400;
 }
 
 @utility pretendard_disabled_400 {

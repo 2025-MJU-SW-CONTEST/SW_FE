@@ -12,6 +12,9 @@ import AIChat from "@pages/AIChat.jsx";
 import Article from "@pages/Article.jsx";
 import Mypage from "@pages/Mypage.jsx";
 import OAuthCallback from "@/pages/OAuthCallback";
+import MyInterpretations from "@/pages/MyInterpretations";
+import MyNicknameChange from "@/pages/MyNicknameChange";
+import EditInterpretation from "@/pages/EditInterpretation";
 
 const routes = [
   {
@@ -45,6 +48,18 @@ const routes = [
       {
         path: pagePath.OAUTH_CALLBACK_KAKAO,
         element: <OAuthCallback />,
+      },
+      {
+        path: pagePath.MY_INTERPRETATIONS,
+        element: <MyInterpretations />,
+      },
+      {
+        path: pagePath.MY_NICKNAME,
+        element: <MyNicknameChange />,
+      },
+      {
+        path: pagePath.EDIT_INTERPRETATION,
+        element: <EditInterpretation />,
       },
     ],
   },
