@@ -7,4 +7,7 @@ export const pagePath = {
   ARTICLE: "article",
   MYPAGE: "mypage",
   OAUTH_CALLBACK_KAKAO: "/auth/login/kakao",
+  MY_INTERPRETATIONS: "/mypage/interpretations",
+  MY_NICKNAME: "/mypage/nickname",
+  EDIT_INTERPRETATION: "/interpretation/edit/:id",
 };
