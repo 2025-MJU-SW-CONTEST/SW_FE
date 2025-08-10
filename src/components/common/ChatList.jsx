@@ -23,9 +23,9 @@ const groupMessages = (messages) => {
 };
 
 
-const ChatList = ({chat}) => {
+const ChatList = ({chat, ref}) => {
   return (
-      <div className="flex-1 overflow-y-auto p-012">
+      <div className="flex-1 overflow-y-auto p-012" ref={ref}>
         {chat.map((group, idx) => (
           <div key={idx}>
             <p key={idx} className="font-family-pretendard font-normal text-012 text-font-500 text-center mb-[10px]">{group.date}</p>

@@ -3,7 +3,7 @@ import BottomNavigation from "@components/common/BottomNavigation.jsx";
 import Input from "@components/AIChat/Input.jsx";
 import ChatList from "@components/common/ChatList.jsx";
 import {useTranslation} from "react-i18next";
-import {useState} from "react";
+import {useState,useEffect, useRef} from "react";
 import dayjs from "dayjs";
 
 const dummyData = [
@@ -78,12 +78,19 @@ const dummyData = [
 ]
 const AiChat = () => {
   const [value, setValue] = useState("");
+  const [isComposing, setIsComposing] = useState(false);
   const [chat, setChat] = useState(dummyData);
 
   const {t} = useTranslation(["placeholder"]);
 
+  const chatListRef = useRef(null);
+
+  useEffect(() => {
+    chatListRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
+
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !isComposing) {
       e.preventDefault();
       handleSubmit();
     }
@@ -103,20 +110,26 @@ const AiChat = () => {
           }
         ]
       }
-    ])
+    ]);
+    setValue("")
   }
 
   return (
     <div>
       <div className="flex flex-col h-screen">
         <AppBar/>
-        <ChatList chat={chat} />
+        <div className="flex-1 overflow-y-auto">
+          <ChatList chat={chat}/>
+          <div ref={chatListRef}/>
+        </div>
+
         <div className="relative">
           <Input
             value={value}
-            setValue={setValue}x
+            setValue={setValue}
             onEnter={handleKeyDown}
             onClickButton={handleSubmit}
+            handleComposition={(value) => setIsComposing(value)}
             placeholder={t("placeholder_question")}
           />
           <div className="h-14"/>
