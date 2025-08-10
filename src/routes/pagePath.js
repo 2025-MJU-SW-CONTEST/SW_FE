@@ -6,4 +6,5 @@ export const pagePath = {
   AICHAT: "aichat",
   ARTICLE: "article",
   MYPAGE: "mypage",
-}
+  OAUTH_CALLBACK_KAKAO: "/auth/login/kakao",
+};

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @layer base {
-    *{
-        font-family: "Pretendard Variable", Pretendard, sans-serif;
-    }
+  * {
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+  }
 }
 
 @theme{
@@ -116,9 +116,9 @@
 }
 
 @utility pretendard_disabled_400 {
-    @apply font-medium leading-lineHeight-020 text-016 text-font-400;
+  @apply font-medium leading-lineHeight-020 text-016 text-font-400;
 }
 
 @utility pretendard_disabled_500 {
-    @apply font-medium leading-lineHeight-020 text-016 text-font-500;
+  @apply font-medium leading-lineHeight-020 text-016 text-font-500;
 }
