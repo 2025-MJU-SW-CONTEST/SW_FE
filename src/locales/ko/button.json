@@ -4,5 +4,9 @@
   "button_back": "뒤로가기",
   "button_complete": "완료하기",
   "button_yes": "맞아",
-  "button_no": "아니야"
+  "button_no": "아니야",
+  "button_cancel": "취소",
+  "button_withdrawal": "탈퇴",
+  "button_edit": "수정하기",
+  "button_delete": "삭제하기"
 }
