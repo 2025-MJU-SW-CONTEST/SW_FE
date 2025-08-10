@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "@/store/useAuth";
 
 const OAuthCallback = () => {
   const navigate = useNavigate();
+  const setAccessToken = useAuth((state) => state.setAccessToken);
+  const setIsLogin = useAuth((state) => state.setIsLogin);
+  const setUserInfo = useAuth((state) => state.setUserInfo);
 
   useEffect(() => {
     async function processOAuthCallback() {
@@ -39,6 +43,9 @@ const OAuthCallback = () => {
         if (accessToken) {
           localStorage.setItem("accessToken", accessToken);
           localStorage.setItem("isLogin", true);
+          setAccessToken(accessToken);
+          setIsLogin(true);
+          setUserInfo({ id, nickname, email, profileUrl });
         } else {
           console.error("Access token not found in DTO.");
           navigate("/login");
@@ -49,14 +56,7 @@ const OAuthCallback = () => {
           navigate("/home");
         } else {
           navigate("/register", {
-            state: {
-              // navigate의 state 속성을 통해 데이터 전달
-              id,
-              nickname,
-              email,
-              profileUrl,
-              // 필요하다면 임시 토큰 등도 여기 담아서 넘기기
-            },
+            state: { id, nickname, email, profileUrl },
           });
         }
       } catch (error) {
@@ -67,7 +67,7 @@ const OAuthCallback = () => {
     }
 
     processOAuthCallback();
-  }, [navigate]);
+  }, [navigate, setAccessToken, setIsLogin, setUserInfo]);
 
   return (
     <div>
