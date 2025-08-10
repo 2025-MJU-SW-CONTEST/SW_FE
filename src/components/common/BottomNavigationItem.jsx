@@ -15,14 +15,7 @@ const BottomNavigationItem = ({ Icon, href, text }) => {
             <div className="flex flex-col items-center justify-center w-16">
               <Icon isActive={isActive} />
             </div>
-            <p
-              className={clsx(
-                "pretendard_medium w-16 text-center",
-                isActive ? "text-primary" : ""
-              )}
-            >
-              {text}
-            </p>
+            <p className={clsx("pretendard_medium w-16 text-center", isActive ? "text-primary" : "")}>{text}</p>
           </div>
         </div>
       )}
