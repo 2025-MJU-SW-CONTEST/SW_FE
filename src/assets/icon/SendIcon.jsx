@@ -1,11 +1,12 @@
 import clsx from "clsx";
 
-const SendIcon = ({className}) => {
+const SendIcon = ({className, onClick}) => {
   return (
     <svg
       width="24"
       height="24"
       viewBox="0 0 24 24"
+      onClick={onClick}
       className={clsx("pretendard_disabled_400", className)}
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
