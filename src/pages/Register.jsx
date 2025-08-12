@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 
 const Register = () => {
   const [value, setValue] = useState("");
+  const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
 
   const { t } = useTranslation(["title", "description","placeholder", "button"]);
@@ -17,7 +18,7 @@ const Register = () => {
   }
 
   return (
-    <div className="px-020">
+    <div className="px-020 flex flex-col h-screen">
       <p className="pretendard_bold mt-[153px] pl-022">
         <span className="text-primary">{t("title:title_service")}</span>
         {t("title:title_welcome")}
@@ -28,18 +29,19 @@ const Register = () => {
           placeholder={t("placeholder:placeholder_nickname")}
           value={value}
           setValue={(value) => {
-            if(value.length <= 10){
+            if(value.length <= 11){
               setValue(value);
             }
           }}
+          setIsActive={setIsActive}
         />
       </div>
-      <div className="px-[29px]">
+      <div className="px-[29px] mt-auto pb-[91px]">
         <Button
           text={t("button:button_complete")}
           type="emphasis"
           onClick={handleCompleteButton}
-          className="mt-[404px] mb-[92px]"
+          isActive={isActive}
         />
       </div>
     </div>
