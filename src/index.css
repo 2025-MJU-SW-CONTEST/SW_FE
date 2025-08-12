@@ -67,6 +67,9 @@
     --gray-100: #F5F5F7;
     --gray-50: #FFFFFF;
 
+    --color-error: #FF3737;
+    --color-error-font: #E10000;
+
     --color-primary: var(--blue-500);
     --color-primary-900: var(--blue-900);
     --color-primary-800: var(--blue-800);

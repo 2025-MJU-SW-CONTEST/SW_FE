@@ -1,3 +1,5 @@
 {
-  "description_nickname": "사용할 닉네임을 입력해주세요"
+  "description_nickname": "사용할 닉네임을 입력해주세요",
+  "description_limit_nickname": "닉네임은 총 10자까지 입력할 수 있어요.",
+  "description_special_nickname": "특수기호 !@#$%^&*()는 입력할 수 없어요."
 }
