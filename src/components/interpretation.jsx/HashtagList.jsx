@@ -8,7 +8,7 @@ const HashtagList = ({ hashtags }) => {
       <div className="pretendard_regular text-014 font-semibold text-font-900">
         {t("description:description_hashtag")}
       </div>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         {hashtags.map((tag) => (
           <div
             key={tag}
