@@ -33,7 +33,7 @@ const dummyData = [
       {
         role: "ai",
         contentType: "image",
-        image: "https://via.placeholder.com/150x200",
+        image: "https://upload.wikimedia.org/wikipedia/ko/1/11/F1%EB%8D%94%EB%AC%B4%EB%B9%842025.jpg",
         active: "yes",
         message: null,
         createdAt: "2025-08-06T09:17:00+09:00"
@@ -52,7 +52,7 @@ const dummyData = [
       {
         role: "ai",
         contentType: "image",
-        image: "https://via.placeholder.com/150x200",
+        image: "https://upload.wikimedia.org/wikipedia/ko/1/11/F1%EB%8D%94%EB%AC%B4%EB%B9%842025.jpg",
         message: null,
         createdAt: "2025-08-07T14:06:15+09:00"
       }
