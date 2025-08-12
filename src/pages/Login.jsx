@@ -3,9 +3,9 @@ import KakaoLoginButton from "@/components/login/KakaoLoginButton";
 
 const Login = () => {
   return (
-    <div className="flex flex-col items-center gap-[189px]">
-      <div className="mt-[198px] size-80 rounded-full bg-gray-300">
-        {/*아직 디자인 안됨*/}
+    <div className="flex flex-col items-center gap-[253.21px]">
+      <div className="mt-[301px]">
+        <img src="img/login.png" />
       </div>
       <div className="mb-[89px]">
         <KakaoLoginButton />

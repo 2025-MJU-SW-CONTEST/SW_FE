@@ -26,20 +26,20 @@ const Onboarding = () => {
       <p className="pretendard_bold mt-[149px] text-center">
         {formatNewlines(t(`onboarding:onboarding_intro_0${page}`))}
       </p>
-      <div className="w-[277.59px] h-[195px] mt-[23px] bg-gray-300">
-        {/*아직 디자인 안됨*/}
-        {page === 1 && <div>첫 번째 페이지 콘텐츠</div>}
-        {page === 2 && <div>두 번째 페이지 콘텐츠</div>}
-        {page === 3 && <div>세 번째 페이지 콘텐츠</div>}
+      <div className="flex items-center mt-[37px] min-h-[221px]">
+        {page === 1 && <img src="img/onboarding_01.png" />}
+        {page === 2 && <img src="img/onboarding_02.png" />}
+        {page === 3 && <img src="img/onboarding_03.png" />}
       </div>
       <p
-        className="pretendard_regular min-h-30 mt-[38px] mb-[42px] px-12 text-center"
+        className="pretendard_regular min-h-30 my-[38px] px-12 text-center"
         style={{ whiteSpace: "pre-line" }}
       >
         <Trans
           i18nKey={`onboarding:onboarding_intro_description_0${page}`}
           components={{
-            bold: <span className="font-bold" />,
+            bold: <span className="font-bold text-primary" />,
+            bold1: <span className="font-bold" />,
           }}
         />
       </p>

@@ -1,5 +1,6 @@
 {
-  "list_mypage_01": "내 해석보기",
+  "list_mypage_01": "내 해석 보기",
   "list_mypage_02": "닉네임 변경",
-  "list_mypage_03": "회원탈퇴"
+  "list_mypage_03": "로그아웃",
+  "list_mypage_04": "회원탈퇴"
 }

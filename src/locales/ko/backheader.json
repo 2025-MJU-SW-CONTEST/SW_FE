@@ -1,0 +1,9 @@
+{
+  "backHeader_writeInterpretation": "해석 작성하기",
+  "backHeader_editInterpretation": "해석 수정하기",
+  "backHeader_movieTitle": "{{title}}",
+  "backHeader_writeReview": "감상평 작성하기",
+  "backHeader_editReview": "감상평 수정하기",
+  "backHeader_myInterpretations": "내 해석 보기",
+  "backHeader_changeNickname": "닉네임 변경"
+}
