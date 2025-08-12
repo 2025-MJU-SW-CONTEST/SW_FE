@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-const Button = ({ text, type, className, onClick, isActive }) => {
+const Button = ({ text, type, className, onClick, isActive = true }) => {
   const buttonClass = clsx(
     "font-family-pretendard w-full h-[50px] rounded-006 cursor-pointer leading-loose text-016 font-bold focus:outline-none",
     isActive ? {
