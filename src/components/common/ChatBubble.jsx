@@ -2,6 +2,7 @@ import clsx from "clsx";
 import ImageButton from "@components/AIChat/ImageButton.jsx";
 import CheckIcon from "@assets/icon/CheckIcon.jsx";
 import CancelIcon from "@assets/icon/CancelIcon.jsx";
+import FillyIcon from "@assets/icon/FillyIcon.jsx";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 dayjs.locale("ko");
@@ -15,7 +16,10 @@ const ChatBubble = ({ type, contentType, message, image, createdAt, showTime, sh
   return (
     <div className={clsx("flex flex-col", type === "user" ? "items-end" : "items-start")}>
       <div className="flex items-start gap-2.5">
-        {type !== "user" && <div className={clsx("w-8 h-8 rounded-full", showAvatar ? "bg-secondary": "bg-none")} />}
+        {type !== "user" &&
+          <div className="w-8 h-8 rounded-full">
+            {showAvatar && <FillyIcon className="w-full h-full"/>}
+        </div>}
         <div
           className={clsx(
             "flex flex-col max-w-72 min-h-10 px-3.5 py-2.5",
