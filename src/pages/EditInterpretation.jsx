@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Button from "@components/common/Button.jsx";
@@ -25,15 +25,21 @@ const EditInterpretation = () => {
 
   const movieId = location.state?.movieId ?? params.movieId;
 
+  const minChars = 50;
+
   const [content, setContent] = useState(existingContent);
   const [isActive, setIsActive] = useState(false);
 
-  useEffect(() => {
-    setIsActive(content.trim().length > 0);
+  // 디버그/표시용 현재 글자수(코드포인트 기준)
+  const trimmedCodePointLength = useMemo(() => {
+    const normalized = (content || "").replace(/\r\n/g, "\n").trim();
+    return [...normalized].length;
   }, [content]);
 
   const handleCompleteButton = async () => {
-    if (!isActive) return;
+    if (!isActive) {
+      return;
+    }
 
     if (!interpretationId) {
       console.error("EditInterpretation: interpretationId가 없습니다.");
@@ -64,18 +70,14 @@ const EditInterpretation = () => {
         label={t("backHeader:backHeader_editInterpretation")}
         onBack={() => navigate(-1)}
       />
-      <div className="flex flex-col flex-1 overflow-y-auto min-h-0 items-center">
+      <div className="flex flex-col flex-1 overflow-y-auto min-h-0">
         <InterpretationInput
           value={content}
           onChange={setContent}
           placeholder={t("placeholder:placeholder_interpretation")}
+          minChars={minChars}
+          onValidityChange={setIsActive}
         />
-        <div className="flex mt-3">
-          <ExclamationIcon />
-          <div className="pretendard_regular text-014 leading-6">
-            {t("description:description_interpretation_announcement")}
-          </div>
-        </div>
         <div className="w-full px-12.5 pb-[49px] mt-auto">
           <Button
             text={t("button:button_complete")}

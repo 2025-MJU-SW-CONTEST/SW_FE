@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import ExclamationIcon from "@/assets/icon/ExclamationIcon";
 import Button from "@components/common/Button.jsx";
 import BackHeader from "@/components/common/BackHeader";
 import InterpretationInput from "@/components/home/InterpretationInput";
@@ -17,20 +16,18 @@ const CreateInterpretation = () => {
     "placeholder",
   ]);
 
+  const minChars = 50;
   const [content, setContent] = useState("");
   const [isActive, setIsActive] = useState(false);
 
-  useEffect(() => {
-    setIsActive(content.trim().length > 0);
-  }, [content]);
-
   const handleCompleteButton = () => {
-    if (!isActive) return;
+    if (!isActive) {
+      return;
+    }
     if (!movieId) {
       console.error("movieId가 없습니다.");
       return;
     }
-    // --- 실제 API 호출 예시 (axios/fetch로 대체) ---
     try {
       // 예: POST /api/movies/:movieId/interpretations
       // const res = await fetch(`/api/movies/${movieId}/interpretations`, {
@@ -54,7 +51,6 @@ const CreateInterpretation = () => {
         hashtags: ["테스트"],
       };
 
-      // MovieDetailPage로 명시적 이동하며 state 전달 (이전 히스토리(-1)보다 안전)
       navigate(`/movies/${movieId}`, { state: { newInterpretation } });
     } catch (err) {
       console.error("해석 제출 실패", err);
@@ -67,18 +63,14 @@ const CreateInterpretation = () => {
         label={t("backHeader:backHeader_writeInterpretation")}
         onBack={() => navigate(-1)}
       />
-      <div className="flex flex-col flex-1 overflow-y-auto min-h-0 items-center">
+      <div className="flex flex-col flex-1 overflow-y-auto min-h-0 ">
         <InterpretationInput
           value={content}
           onChange={setContent}
           placeholder={t("placeholder:placeholder_interpretation")}
+          minChars={minChars}
+          onValidityChange={setIsActive}
         />
-        <div className="flex mt-3">
-          <ExclamationIcon />
-          <div className="pretendard_regular text-014 leading-6">
-            {t("description:description_interpretation_announcement")}
-          </div>
-        </div>
         <div className="w-full px-12.5 pb-[49px] mt-auto">
           <Button
             text={t("button:button_complete")}
