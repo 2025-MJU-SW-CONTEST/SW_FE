@@ -18,7 +18,8 @@
       "@pages/*": ["src/pages/*"],
       "@routes/*": ["src/routes/*"],
       "@store/*": ["src/store/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@locales/*": ["src/locales/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

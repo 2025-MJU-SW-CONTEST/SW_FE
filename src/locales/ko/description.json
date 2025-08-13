@@ -1,0 +1,12 @@
+{
+  "description_nickname": "사용할 닉네임을 입력해주세요",
+  "description_limit_nickname": "닉네임은 총 10자까지 입력할 수 있어요.",
+  "description_special_nickname": "특수기호 !@#$%^&*()는 입력할 수 없어요.",
+  "description_modal_01": "정말로 회원탈퇴를 하시겠습니까?",
+  "description_modal_02": "회원탈퇴시 모든 정보는 삭제되며, 같은 아이디로 재가입시 작성한 데이터는 복원되지 않습니다.",
+  "description_hashtag": "필리가 뽑은 해시태그",
+  "description_toast_01": "해석 작성이 완료되었어요.",
+  "description_toast_02": "작성한 해석을 삭제했어요.",
+  "description_toast_03": "감상평 작성이 완료되었어요.",
+  "description_toast_04": "작성한 감상평을 삭제했어요."
+}

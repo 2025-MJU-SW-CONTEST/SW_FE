@@ -1,9 +1,11 @@
 import React from 'react';
+import BottomNavigation from "@components/common/BottomNavigation.jsx";
 
 const Home = () => {
+
   return (
-    <div>
-      <p>This is Home</p>
+    <div className="">
+      <BottomNavigation/>
     </div>
   );
 };
