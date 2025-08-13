@@ -7,6 +7,7 @@
   "description_no_interpretation": "아직 등록된 해석이 없어요. \n+ 를 눌러 해석을 작성해보세요!",
   "description_interpretation_count": " 총 {{count}}건의 해석이 있어요.",
   "description_interpretation_announcement": "작성한 해석을 바탕으로 필리가 해시태그를 추천해드려요!",
+  "description_interpretation_caution": "해석은 50자 이상 작성해주세요.",
   "description_modal_01": "정말로 회원탈퇴를 하시겠습니까?",
   "description_modal_02": "회원탈퇴시 모든 정보는 삭제되며, 같은 아이디로 재가입시 작성한 데이터는 복원되지 않습니다.",
   "description_hashtag": "필리가 뽑은 해시태그",
