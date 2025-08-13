@@ -19,11 +19,10 @@ const EditInterpretation = () => {
 
   const existingContent = location.state?.existingContent || "";
   const interpretationIdFromState = location.state?.interpretationId;
-  const interpretationIdFromParams = params.id || params.interpretationId; // 라우트에 따라 이름 다를 수 있음
+  const interpretationIdFromParams = params.id || params.interpretationId;
   const interpretationId =
     interpretationIdFromState ?? interpretationIdFromParams;
 
-  // 3) movieId(상위로 돌아갈 때 필요하면)도 state로 전달해두면 편함
   const movieId = location.state?.movieId ?? params.movieId;
 
   const [content, setContent] = useState(existingContent);
