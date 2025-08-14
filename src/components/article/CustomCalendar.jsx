@@ -12,7 +12,7 @@ function CustomCaption() {
   )
 }
 
-export default function CustomCalendar() {
+export default function CustomCalendar({date}) {
   const [month, setMonth] = useState(new Date());
   const defaultClassNames = getDefaultClassNames();
 
@@ -45,20 +45,19 @@ export default function CustomCalendar() {
       </div>
       <DayPicker
         weekStartsOn={0}
+        mode="single"
         formatters={{
           formatWeekdayName: (day) => weekdaysShort[day.getDay()],
         }}
         month={month}
         onMonthChange={setMonth}
-        styles={{
-          root: {width: '100%'},
-          day: {width: '55px', height: '55px'},
-          monthCaption: {display: 'none'}
-        }}
         classNames={{
+          day: 'w-[55px] h-[55px] pl-1',
           chevron: `${defaultClassNames.chevron} fill-primary w-10 h-5 rounded-full`,
           weekdays: `${defaultClassNames.weekdays} text-[12px] text-gray2`,
           weekday: `${defaultClassNames.weekday} nth-1:text-red last-of-type:text-blue`,
+          selected: `${defaultClassNames.selected}`,
+          monthCaption: 'hidden'
         }}
         components={{
           MonthCaption: CustomCaption,
