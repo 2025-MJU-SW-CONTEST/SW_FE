@@ -7,6 +7,7 @@ import BackHeader from "@/components/common/BackHeader";
 
 const MyNicknameChange = () => {
   const [value, setValue] = useState("");
+  const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
 
   const { t } = useTranslation(["backheader", "placeholder", "button"]);
@@ -16,33 +17,34 @@ const MyNicknameChange = () => {
   };
 
   return (
-    <>
+    <div className=" flex flex-col h-screen">
       <BackHeader
         label={t("backHeader:backHeader_changeNickname")}
         onBack={() => navigate(-1)}
       />
-      <div className="px-020">
+      <div className="flex flex-col flex-1 px-020">
         <div className="px-022 mt-12">
           <TextField
             placeholder={t("placeholder:placeholder_nickname")}
             value={value}
             setValue={(value) => {
-              if (value.length <= 10) {
+              if (value.length <= 11) {
                 setValue(value);
               }
             }}
+            setIsActive={setIsActive}
           />
         </div>
-        <div className="px-[29px]">
+        <div className="px-[29px] mt-auto pb-10.5">
           <Button
             text={t("button:button_complete")}
             type="emphasis"
             onClick={handleCompleteButton}
-            className="mt-[563px] mb-10.5"
+            isActive={isActive}
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -195,7 +195,7 @@ const MyInterpretations = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col h-screen">
       <BackHeader
         label={t("backHeader:backHeader_myInterpretations")}
         onBack={() => navigate(-1)}
@@ -205,29 +205,33 @@ const MyInterpretations = () => {
           작성한 해석이 없습니다.
         </p>
       ) : (
-        <InfiniteScroll
-          dataLength={items.length}
-          next={fetchMoreData}
-          hasMore={hasMore}
-          loader={
-            <div className="pretendard_regular text-center mb-1">로딩중...</div>
-          }
-          height={window.innerHeight - 106.991} // 화면 세로 크기 - 헤더 높이
-        >
-          <div className="flex flex-col py-[25px] px-4 gap-[25px]">
-            {items.map((item) => (
-              <InterpretationCard
-                key={item.id}
-                data={item}
-                isMine={isMine}
-                onDelete={handleDelete}
-              />
-            ))}
-          </div>
-        </InfiniteScroll>
+        <div id="scrollableDiv" className="flex-1 overflow-y-auto">
+          <InfiniteScroll
+            dataLength={items.length}
+            next={fetchMoreData}
+            hasMore={hasMore}
+            loader={
+              <div className="pretendard_regular text-center mb-1">
+                로딩중...
+              </div>
+            }
+            scrollableTarget="scrollableDiv"
+          >
+            <div className="flex flex-col py-[25px] px-4 gap-[25px]">
+              {items.map((item) => (
+                <InterpretationCard
+                  key={item.id}
+                  data={item}
+                  isMine={isMine}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </div>
+          </InfiniteScroll>
+        </div>
       )}
       {toastMessage && <ToastMessage message={toastMessage} />}
-    </>
+    </div>
   );
 };
 
