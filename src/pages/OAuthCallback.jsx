@@ -1,79 +1,110 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "@/store/useAuth";
+import Spinner from "@/components/login/Spinner";
+
+const API = import.meta.env.VITE_API_BASE_URL;
 
 const OAuthCallback = () => {
   const navigate = useNavigate();
-  const setAccessToken = useAuth((state) => state.setAccessToken);
-  const setIsLogin = useAuth((state) => state.setIsLogin);
-  const setUserInfo = useAuth((state) => state.setUserInfo);
+  const setAuthenticated = useAuth((s) => s.setAuthenticated);
+  const setNeedsRegister = useAuth((s) => s.setNeedsRegister);
+  const setChecking = useAuth((s) => s.setChecking);
+
+  const processedRef = useRef(false);
 
   useEffect(() => {
     async function processOAuthCallback() {
-      try {
-        // 1. URL에서 카카오가 넘겨준 'code' 파라미터 파싱
-        const urlParams = new URLSearchParams(window.location.search);
-        const authCode = urlParams.get("code"); // 카카오 인가 코드
+      if (processedRef.current) return;
+      processedRef.current = true;
 
+      try {
+        if (!API) {
+          console.error("API 베이스 URL이 없습니다. .env.local 확인 필요");
+          return navigate("/login", { replace: true });
+        }
+
+        setChecking();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const authCode = urlParams.get("code");
         if (!authCode) {
           console.error("Authorization code not found in URL.");
-          navigate("/login");
-          return;
+          return navigate("/login", { replace: true });
         }
 
-        // 2. 파싱한 'code'를 백엔드의 '/auth/login'으로 보내 요청
-        const response = await fetch("/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ code: authCode }),
-        });
+        const res = await fetch(
+          `${API}/auth/login/kakao?code=${encodeURIComponent(authCode)}`,
+          { method: "GET" }
+        );
+        if (!res.ok) throw new Error(`Backend login error: ${res.status}`);
 
-        if (!response.ok) {
-          throw new Error(`Backend login error: ${response.status}`);
+        // 토큰 헤더에 있는지 확인
+        const authHeader =
+          res.headers.get("Authorization") || res.headers.get("authorization");
+        const tokenFromHeader = authHeader
+          ? authHeader.replace(/^Bearer\s+/i, "")
+          : null;
+
+        let dto = {};
+        try {
+          dto = await res.json();
+        } catch (_) {
+          dto = {};
         }
 
-        const authDto = await response.json(); // 백엔드가 DTO에 담아서 응답해주는 부분
-        console.log("백엔드로부터 받은 DTO:", authDto);
+        console.log("백엔드 DTO:", dto, "AuthHeader:", authHeader);
 
-        const { isRegistered, accessToken, id, nickname, email, profileUrl } =
-          authDto; // DTO 필드명 확인
+        const isRegistered =
+          (dto.isRegistered ?? dto.registered ?? false) === true;
 
-        if (accessToken) {
-          localStorage.setItem("accessToken", accessToken);
-          localStorage.setItem("isLogin", true);
-          setAccessToken(accessToken);
-          setIsLogin(true);
-          setUserInfo({ id, nickname, email, profileUrl });
-        } else {
-          console.error("Access token not found in DTO.");
-          navigate("/login");
-          return;
-        }
+        if (!isRegistered) {
+          // 회원가입 대기 상태 저장(새로고침 대비)
+          setNeedsRegister({
+            email: dto.email ?? null,
+            nickname: dto.nickname ?? null,
+            profileUrl: dto.profileUrl ?? null,
+            tempToken: dto.tempToken ?? tokenFromHeader ?? null,
+          });
 
-        if (isRegistered) {
-          navigate("/home");
-        } else {
-          navigate("/register", {
-            state: { id, nickname, email, profileUrl },
+          return navigate("/register", {
+            replace: true,
+            state: {
+              email: dto.email ?? null,
+              nickname: dto.nickname ?? null,
+              profileUrl: dto.profileUrl ?? null,
+            },
           });
         }
-      } catch (error) {
-        console.error("OAuthCallback 처리 중 오류 발생:", error);
-        alert("로그인 처리 중 오류가 발생했습니다. 다시 시도해 주세요.");
-        navigate("/login");
+
+        // 가입 완료 사용자: 토큰이 바디 또는 헤더에 있어야 함
+        const finalToken = dto.accessToken ?? tokenFromHeader;
+        if (!finalToken) {
+          console.error("가입 사용자지만 토큰이 바디/헤더 어디에도 없음");
+          return navigate("/login", { replace: true });
+        }
+
+        setAuthenticated({
+          token: finalToken,
+          user: {
+            id: dto.id ?? null,
+            nickname: dto.nickname ?? null,
+            email: dto.email ?? null,
+            profileUrl: dto.profileUrl ?? null,
+          },
+        });
+
+        return navigate("/", { replace: true });
+      } catch (e) {
+        console.error("OAuthCallback 처리 중 오류:", e);
+        return navigate("/login", { replace: true });
       }
     }
 
     processOAuthCallback();
-  }, [navigate, setAccessToken, setIsLogin, setUserInfo]);
+  }, [navigate, setAuthenticated, setNeedsRegister, setChecking]);
 
-  return (
-    <div>
-      <p>카카오 로그인 최종 확인 중...</p>
-    </div>
-  );
+  return <Spinner message="카카오 로그인 최종 확인 중..." />;
 };
 
 export default OAuthCallback;

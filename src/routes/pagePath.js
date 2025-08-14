@@ -6,8 +6,10 @@ export const pagePath = {
   AICHAT: "aichat",
   ARTICLE: "article",
   MYPAGE: "mypage",
-  OAUTH_CALLBACK_KAKAO: "/auth/login/kakao",
+  OAUTH_CALLBACK_KAKAO: "/oauth/callback/kakao",
+  MOVIE_DETAIL: "/movies/:id",
   MY_INTERPRETATIONS: "/mypage/interpretations",
   MY_NICKNAME: "/mypage/nickname",
+  CREATE_INTERPRETATION: "/movies/:id/interpretation/new",
   EDIT_INTERPRETATION: "/interpretation/edit/:id",
 };

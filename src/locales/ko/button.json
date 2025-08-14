@@ -8,5 +8,8 @@
   "button_cancel": "취소",
   "button_withdrawal": "탈퇴",
   "button_edit": "수정하기",
-  "button_delete": "삭제하기"
+  "button_delete": "삭제하기",
+  "button_tab_basic": "기본 정보",
+  "button_tab_interpretation": "영화 해석",
+  "button_chat": "채팅하기"
 }

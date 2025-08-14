@@ -49,7 +49,7 @@ const Mypage = () => {
 
   return (
     <div>
-      <div className="flex flex-col pt-19 px-[37px]">
+      <div className="flex flex-col pt-[29px] px-[37px]">
         <MyProfile userInfo={mockUserInfo} />
         <MypageButtons
           onViewInterpretations={handleViewInterpretations}

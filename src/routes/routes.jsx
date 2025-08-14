@@ -12,9 +12,11 @@ import AIChat from "@pages/AIChat.jsx";
 import Article from "@pages/Article.jsx";
 import Mypage from "@pages/Mypage.jsx";
 import OAuthCallback from "@/pages/OAuthCallback";
+import MovieDetailPage from "@/pages/MovieDetailPage";
 import MyInterpretations from "@/pages/MyInterpretations";
 import MyNicknameChange from "@/pages/MyNicknameChange";
 import EditInterpretation from "@/pages/EditInterpretation";
+import CreateInterpretation from "@/pages/CreateInterpretation";
 
 const routes = [
   {
@@ -50,12 +52,20 @@ const routes = [
         element: <OAuthCallback />,
       },
       {
+        path: pagePath.MOVIE_DETAIL,
+        element: <MovieDetailPage />,
+      },
+      {
         path: pagePath.MY_INTERPRETATIONS,
         element: <MyInterpretations />,
       },
       {
         path: pagePath.MY_NICKNAME,
         element: <MyNicknameChange />,
+      },
+      {
+        path: pagePath.CREATE_INTERPRETATION,
+        element: <CreateInterpretation />,
       },
       {
         path: pagePath.EDIT_INTERPRETATION,

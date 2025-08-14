@@ -9,7 +9,9 @@ const InterpretationCard = ({ data, isMine, onDelete }) => {
   const navigate = useNavigate();
 
   const handleEditInterpretation = () => {
-    navigate(`/interpretation/edit/${data.id}`);
+    navigate(`/interpretation/edit/${data.id}`, {
+      state: { existingContent: data.content, interpretationId: data.id },
+    });
   };
 
   const handleDelete = () => {
@@ -28,7 +30,7 @@ const InterpretationCard = ({ data, isMine, onDelete }) => {
         )}
       </div>
       <ContentBody text={data.content} />
-      <HashtagList hashtags={data.hashtags} />
+      <HashtagList hashtags={data.hashtags || []} />
     </div>
   );
 };
