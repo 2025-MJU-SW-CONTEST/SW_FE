@@ -8,5 +8,7 @@
   "description_toast_01": "해석 작성이 완료되었어요.",
   "description_toast_02": "작성한 해석을 삭제했어요.",
   "description_toast_03": "감상평 작성이 완료되었어요.",
-  "description_toast_04": "작성한 감상평을 삭제했어요."
+  "description_toast_04": "작성한 감상평을 삭제했어요.",
+  "description_calendar_01": "날짜를 선택해주세요",
+  "description_calendar_02": "감상평이 없어요.\n +버튼을 눌러 감상평을 적어보세요!"
 }
