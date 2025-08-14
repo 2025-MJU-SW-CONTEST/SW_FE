@@ -2,5 +2,9 @@
   "title_nickname": "닉네임",
   "title_service": "필메이트",
   "title_welcome": "에 오신걸 환영해요!",
-  "title_fily": "AI 해설사 필리"
+  "title_fily": "AI 해설사 필리",
+  "title_home_movie": "✨ 최근 개봉한 영화",
+  "title_movie_detail_synopsis": "줄거리",
+  "title_movie_detail_rating": "평점",
+  "title_movie_detail_casting": "감독 및 출연진"
 }

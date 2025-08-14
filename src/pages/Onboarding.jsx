@@ -23,7 +23,7 @@ const Onboarding = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <p className="pretendard_bold mt-[149px] text-center">
+      <p className="pretendard_bold mt-21.5 text-center">
         {formatNewlines(t(`onboarding:onboarding_intro_0${page}`))}
       </p>
       <div className="flex items-center mt-[37px] min-h-[221px]">

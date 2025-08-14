@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 
 const HashtagList = ({ hashtags }) => {
   const { t } = useTranslation(["description"]);
+  if (!hashtags || !Array.isArray(hashtags)) return null;
 
   return (
     <div className="flex flex-col gap-2">
