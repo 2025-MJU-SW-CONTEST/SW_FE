@@ -4,7 +4,6 @@
   * {
     font-family: "Pretendard Variable", Pretendard, sans-serif;
   }
-
 }
 
 @layer utilities {
@@ -24,7 +23,6 @@
   .shadow-toast {
     box-shadow: 0 2px 10px 0 rgba(177, 176, 255, 0.5);
   }
-
 }
 
 @theme {
@@ -91,9 +89,9 @@
 
   --red-error-font: #e10000;
   --red-error: #ff3737;
-  --red: #FF6060;
-  --blue: #4DC4CC;
-  --gray: #BBBBBB;
+  --red: #ff6060;
+  --blue: #4dc4cc;
+  --gray: #bbbbbb;
 
   --color-primary: var(--blue-500);
   --color-primary-900: var(--blue-900);

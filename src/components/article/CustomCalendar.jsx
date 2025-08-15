@@ -1,18 +1,16 @@
 import LeftArrowIcon from "@assets/icon/Article/LeftArrowIcon.jsx";
 import RightArrowIcon from "@assets/icon/Article/RightArrowIcon.jsx";
-import {useState} from "react";
+import { useState } from "react";
 import { DayPicker, getDefaultClassNames } from "react-day-picker";
 import "react-day-picker/style.css";
 
-const weekdaysShort = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+const weekdaysShort = ["S", "M", "T", "W", "T", "F", "S"];
 
 function CustomCaption() {
-  return (
-    <div className="hidden"></div>
-  )
+  return <div className="hidden"></div>;
 }
 
-export default function CustomCalendar({date}) {
+export default function CustomCalendar({ date }) {
   const [month, setMonth] = useState(new Date());
   const defaultClassNames = getDefaultClassNames();
 
@@ -33,13 +31,13 @@ export default function CustomCalendar({date}) {
       <div className="w-full flex justify-center">
         <div className="flex items-center gap-6 mb-[19px]">
           <button onClick={handlePrevMonth} aria-label="이전 달">
-            <LeftArrowIcon/>
+            <LeftArrowIcon />
           </button>
           <p className="text-lg font-semibold">
-            {month.toLocaleString("en-US", {year: "numeric", month: "long"})}
+            {month.toLocaleString("en-US", { year: "numeric", month: "long" })}
           </p>
           <button onClick={handleNextMonth} aria-label="다음 달">
-            <RightArrowIcon/>
+            <RightArrowIcon />
           </button>
         </div>
       </div>
@@ -52,12 +50,12 @@ export default function CustomCalendar({date}) {
         month={month}
         onMonthChange={setMonth}
         classNames={{
-          day: 'w-[55px] h-[55px] pl-1',
+          day: "w-[55px] h-[55px] pl-1",
           chevron: `${defaultClassNames.chevron} fill-primary w-10 h-5 rounded-full`,
           weekdays: `${defaultClassNames.weekdays} text-[12px] text-gray2`,
           weekday: `${defaultClassNames.weekday} nth-1:text-red last-of-type:text-blue`,
-          selected: `${defaultClassNames.selected}`,
-          monthCaption: 'hidden'
+          selected: `bg-primary-200 rounded-full`,
+          monthCaption: "hidden",
         }}
         components={{
           MonthCaption: CustomCaption,
