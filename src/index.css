@@ -23,6 +23,22 @@
   .shadow-toast {
     box-shadow: 0 2px 10px 0 rgba(177, 176, 255, 0.5);
   }
+
+  .has-event {
+    position: relative;
+  }
+
+  .has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; /* 날짜 밑 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+  }
 }
 
 @theme {
@@ -89,6 +105,9 @@
 
   --red-error-font: #e10000;
   --red-error: #ff3737;
+  --red: #ff6060;
+  --blue: #4dc4cc;
+  --gray: #bbbbbb;
 
   --color-primary: var(--blue-500);
   --color-primary-900: var(--blue-900);
@@ -127,6 +146,9 @@
 
   --color-error-font: var(--red-error-font);
   --color-error: var(--red-error);
+  --color-red: var(--red);
+  --color-blue: var(--blue);
+  --color-gray2: var(--gray);
 }
 
 @utility pretendard_bold {

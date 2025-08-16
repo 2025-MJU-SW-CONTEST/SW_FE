@@ -10,7 +10,6 @@ const TextField = ({placeholder, value, setValue, type = "normal", className, se
   const isContainSpecialChar = specialCharPattern.test(value);
 
   useEffect(() => {
-    console.log(isOverLimit, isContainSpecialChar)
     setIsActive(!isOverLimit && !isContainSpecialChar && value.length > 0);
   }, [value]);
 
@@ -25,12 +24,14 @@ const TextField = ({placeholder, value, setValue, type = "normal", className, se
           onChange={e => setValue(e.target.value)}
           className={clsx("w-full border-b border-primary px-016 h-10 outline-none", className)}
         />
-        {value.length > 0 && <div className="flex items-center gap-007 absolute right-2 bottom-2">
+        {value.length > 0 && type === "normal" &&
+          <div className="flex items-center gap-007 absolute right-2 bottom-2">
           <p className={clsx("font-family-pretendard text-018 font-normal tracking-tight", isOverLimit ? "text-error-font": "text-primary")}>{value.length}/10</p>
           <CancelGradientIcon onClick={() => setValue("")}/>
         </div>}
       </div>
-      {(isOverLimit || isContainSpecialChar) && <div className="mt-3 flex items-center">
+      {(isOverLimit || isContainSpecialChar) && type === "normal" &&
+        <div className="mt-3 flex items-center">
         <ExclamationIcon className="text-error"/>
         <p className="text-error-font pretendard_regular">{
           isOverLimit ? t("description:description_limit_nickname") :  t("description:description_special_nickname")

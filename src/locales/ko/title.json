@@ -6,5 +6,7 @@
   "title_home_movie": "✨ 최근 개봉한 영화",
   "title_movie_detail_synopsis": "줄거리",
   "title_movie_detail_rating": "평점",
-  "title_movie_detail_casting": "감독 및 출연진"
+  "title_movie_detail_casting": "감독 및 출연진",
+  "title_movie_name": "영화 제목",
+  "title_movie_article": "감상평"
 }
