@@ -23,6 +23,22 @@
   .shadow-toast {
     box-shadow: 0 2px 10px 0 rgba(177, 176, 255, 0.5);
   }
+
+  .has-event {
+    position: relative;
+  }
+
+  .has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; /* 날짜 밑 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+  }
 }
 
 @theme {

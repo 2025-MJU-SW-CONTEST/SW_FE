@@ -10,7 +10,7 @@ function CustomCaption() {
   return <div className="hidden"></div>;
 }
 
-export default function CustomCalendar({ date }) {
+export default function CustomCalendar({ modifiers, selectedDay, setSelectedDay }) {
   const [month, setMonth] = useState(new Date());
   const defaultClassNames = getDefaultClassNames();
 
@@ -42,6 +42,17 @@ export default function CustomCalendar({ date }) {
         </div>
       </div>
       <DayPicker
+        modifiers={{
+          hasEvent: (date) =>
+            modifiers.some(
+              eventDate => eventDate.toDateString() === date.toDateString()
+            ),
+        }}
+        modifiersClassNames={{
+          hasEvent: 'has-event',
+        }}
+        selected={selectedDay}
+        onSelect={setSelectedDay}
         weekStartsOn={0}
         mode="single"
         formatters={{
@@ -50,7 +61,7 @@ export default function CustomCalendar({ date }) {
         month={month}
         onMonthChange={setMonth}
         classNames={{
-          day: "w-[55px] h-[55px] pl-1",
+          day: "w-[50px] h-[50px] pl-1",
           chevron: `${defaultClassNames.chevron} fill-primary w-10 h-5 rounded-full`,
           weekdays: `${defaultClassNames.weekdays} text-[12px] text-gray2`,
           weekday: `${defaultClassNames.weekday} nth-1:text-red last-of-type:text-blue`,

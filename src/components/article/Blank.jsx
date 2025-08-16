@@ -7,7 +7,7 @@ import {useTranslation} from "react-i18next";
 const Blank = ({type}) => {
   const {t} = useTranslation(["description"]);
   return (
-    <div className={clsx("flex flex-col items-center", type === "date" ? " gap-[29px]": "gap-[9px]")}>
+    <div className={clsx("flex flex-col items-center mt-[130px]", type === "date" ? " gap-[29px]": "gap-[9px]")}>
       {type === "date" && <CalendarIcon/>}
       {type === "article" && <CloseIcon/>}
       <p className="pretendard_regular whitespace-pre-line text-center">{
