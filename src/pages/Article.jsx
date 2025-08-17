@@ -10,6 +10,7 @@ import {pagePath} from "@routes/pagePath.js";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useReviewYear} from "@hooks/useReviewService.js";
+import {useReviewDate} from "@hooks/useReviewService.js";
 
 import dayjs from "dayjs";
 
@@ -17,10 +18,15 @@ import dayjs from "dayjs";
 const Article = () => {
   const [selectDay, setSelectDay] = useState(null);
   const [month, setMonth] = useState(new Date());
+
   const year = parseInt(dayjs(month).format('YYYY'), 10); // 2025 -> 숫자
   const monthNum = parseInt(dayjs(month).format('M'), 10);
-  const {data} = useReviewYear(year, monthNum);
-  const modifiers =  data?.map(dateStr => new Date(dateStr))
+  const selectedDay = dayjs(selectDay).format('YYYY-MM-DD');
+
+  const {data: monthInfo} = useReviewYear(year, monthNum);
+  const {data: dateInfo} = useReviewDate(selectedDay);
+
+  const modifiers =  monthInfo?.map(dateStr => new Date(dateStr))
   const navigate = useNavigate();
 
   return (
