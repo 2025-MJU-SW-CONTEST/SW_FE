@@ -12,8 +12,8 @@ export const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.request.use((config) => {
-  const accessToken = useAuth((s) => s.accessToken);
-  if(accessToken) {
+    const { accessToken } = useAuth.getState();
+    if(accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
   return config;
