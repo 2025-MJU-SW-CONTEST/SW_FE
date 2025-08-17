@@ -36,6 +36,10 @@ const routes = [
         path: pagePath.REGISTER,
         element: <Register />,
       },
+      {
+        path: pagePath.OAUTH_CALLBACK_KAKAO,
+        element: <OAuthCallback />,
+      },
 
     ],
   },
@@ -62,10 +66,6 @@ const routes = [
       {
         path: pagePath.MYPAGE,
         element: <Mypage />,
-      },
-      {
-        path: pagePath.OAUTH_CALLBACK_KAKAO,
-        element: <OAuthCallback />,
       },
       {
         path: pagePath.MOVIE_DETAIL,
