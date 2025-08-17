@@ -12,7 +12,6 @@ export const useRegister = () => {
    mutationFn: ({nickname, profileUrl, tempToken}) => authService.postSignUp({nickname, profileUrl, tempToken}),
    onSuccess: (res) => {
      const token = res.headers["authorization"]
-
      setAuthenticated({
        token,
        user: {
@@ -22,6 +21,7 @@ export const useRegister = () => {
          profileUrl: res.data.profileUrl ?? null,
        }
      })
+     localStorage.setItem("isLogin", true)
      navigate("/");
    },
    onError: (error) => {

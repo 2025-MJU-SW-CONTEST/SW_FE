@@ -10,7 +10,7 @@ function CustomCaption() {
   return <div className="hidden"></div>;
 }
 
-export default function CustomCalendar({ modifiers, selectedDay, setSelectedDay }) {
+export default function CustomCalendar({ setMonthProps, modifiers, selectedDay, setSelectedDay }) {
   const [month, setMonth] = useState(new Date());
   const defaultClassNames = getDefaultClassNames();
 
@@ -18,12 +18,14 @@ export default function CustomCalendar({ modifiers, selectedDay, setSelectedDay 
     const prev = new Date(month);
     prev.setMonth(month.getMonth() - 1);
     setMonth(prev);
+    setMonthProps(prev);
   };
 
   const handleNextMonth = () => {
     const next = new Date(month);
     next.setMonth(month.getMonth() + 1);
     setMonth(next);
+    setMonthProps(next);
   };
 
   return (
@@ -44,7 +46,7 @@ export default function CustomCalendar({ modifiers, selectedDay, setSelectedDay 
       <DayPicker
         modifiers={{
           hasEvent: (date) =>
-            modifiers.some(
+            modifiers?.some(
               eventDate => eventDate.toDateString() === date.toDateString()
             ),
         }}

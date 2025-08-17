@@ -9,15 +9,19 @@ import ScrollArea from "@components/common/ScrollArea.jsx";
 import {pagePath} from "@routes/pagePath.js";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {useReviewYear} from "@hooks/useReviewService.js";
 
-const dummyData = ["2025-08-13", "2025-08-15"]
+import dayjs from "dayjs";
+
 
 const Article = () => {
   const [selectDay, setSelectDay] = useState(null);
-  const modifiers =  dummyData.map(dateStr => new Date(dateStr))
-
+  const [month, setMonth] = useState(new Date());
+  const year = parseInt(dayjs(month).format('YYYY'), 10); // 2025 -> 숫자
+  const monthNum = parseInt(dayjs(month).format('M'), 10);
+  const {data} = useReviewYear(year, monthNum);
+  const modifiers =  data?.map(dateStr => new Date(dateStr))
   const navigate = useNavigate();
-
 
   return (
     <div>
@@ -27,6 +31,7 @@ const Article = () => {
             modifiers={modifiers}
             selectedDay={selectDay}
             setSelectedDay={setSelectDay}
+            setMonthProps={setMonth}
           />
           <Divider className="mt-[33px]"/>
           {/*<div className="px-016 mt-[17px]"><Content/></div>*/}
