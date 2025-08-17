@@ -2,19 +2,20 @@ import TextField from "@components/common/TextField.jsx";
 import Button from "@components/common/Button.jsx";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useRegister} from "@hooks/useAuthService.js";
+import {useLocation} from "react-router-dom";
 
 const Register = () => {
+  const location = useLocation();
+
   const [value, setValue] = useState("");
   const [isActive, setIsActive] = useState(false);
-  const navigate = useNavigate();
 
   const { t } = useTranslation(["title", "description","placeholder", "button"]);
+  const {mutateAsync} = useRegister();
 
-  const handleCompleteButton = () => {
-    localStorage.setItem("isLogin", true);
-    localStorage.setItem("accessToken", "filmmateo02030404");
-    navigate("/");
+  const handleCompleteButton = async () => {
+    await mutateAsync({nickname: value, ...location.state});
   }
 
   return (
