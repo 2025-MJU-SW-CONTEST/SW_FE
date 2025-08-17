@@ -73,6 +73,7 @@ const OAuthCallback = () => {
               email: dto.email ?? null,
               nickname: dto.nickname ?? null,
               profileUrl: dto.profileUrl ?? null,
+              tempToken: dto.tempToken ?? tokenFromHeader ?? null,
             },
           });
         }
