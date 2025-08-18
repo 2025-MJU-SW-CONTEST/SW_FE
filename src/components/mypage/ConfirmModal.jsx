@@ -2,7 +2,13 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import MyIcon_5 from "@/assets/icon/MyPage/MyIcon_5";
 
-const ConfirmModal = ({ isOpen, onCancel, onConfirm, children }) => {
+const ConfirmModal = ({
+  isOpen,
+  onCancel,
+  onConfirm,
+  loading = false,
+  children,
+}) => {
   const { t } = useTranslation(["description", "button"]);
 
   if (!isOpen) return null;
@@ -24,12 +30,14 @@ const ConfirmModal = ({ isOpen, onCancel, onConfirm, children }) => {
           <div className="flex gap-11.5 pretendard_medium text-016">
             <button
               onClick={onCancel}
+              disabled={loading}
               className="px-12.5 py-[5px] rounded-006 bg-font-200 cursor-pointer focus:outline-none text-font-400"
             >
               {t("button:button_cancel")}
             </button>
             <button
               onClick={onConfirm}
+              disabled={loading}
               className="px-12.5 py-[5px] rounded-006 bg-error cursor-pointer focus:outline-none text-blue-50"
             >
               {t("button:button_withdrawal")}
