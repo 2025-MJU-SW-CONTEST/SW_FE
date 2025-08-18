@@ -8,14 +8,13 @@ import {useLocation} from "react-router-dom";
 const Register = () => {
   const location = useLocation();
 
-  const [value, setValue] = useState("");
+  const [nickname, setNickname] = useState("");
   const [isActive, setIsActive] = useState(false);
 
   const { t } = useTranslation(["title", "description","placeholder", "button"]);
   const {mutateAsync} = useRegister();
-
   const handleCompleteButton = async () => {
-    await mutateAsync({nickname: value, ...location.state});
+    await mutateAsync({ ...location.state, nickname: nickname});
   }
 
   return (
@@ -28,10 +27,10 @@ const Register = () => {
       <div className="px-022 mt-[35px]">
         <TextField
           placeholder={t("placeholder:placeholder_nickname")}
-          value={value}
-          setValue={(value) => {
-            if(value.length <= 11){
-              setValue(value);
+          value={nickname}
+          setValue={(val) => {
+            if(val.length <= 11){
+              setNickname(val);
             }
           }}
           setIsActive={setIsActive}
