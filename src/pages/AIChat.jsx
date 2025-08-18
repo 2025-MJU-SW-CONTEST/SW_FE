@@ -4,6 +4,7 @@ import Input from "@components/AIChat/Input.jsx";
 import ChatList from "@components/common/ChatList.jsx";
 import {useTranslation} from "react-i18next";
 import {useState,useEffect, useRef} from "react";
+import {usePostNewAIChat, useGetAIChatRoomsHistory, useGetAIChat} from "@hooks/useChatService.js";
 import dayjs from "dayjs";
 
 const dummyData = [
@@ -77,17 +78,21 @@ const dummyData = [
   }
 ]
 const AiChat = () => {
+  const [chatRoomId, setChatRoomId] = useState(undefined);
   const [value, setValue] = useState("");
   const [isComposing, setIsComposing] = useState(false);
   const [chat, setChat] = useState(dummyData);
 
   const {t} = useTranslation(["placeholder"]);
+  const {mutateAsync: createChatRoom} = usePostNewAIChat();
+  const {data: chatData, refetch} = useGetAIChatRoomsHistory({id: chatRoomId, page: 0});
 
   const chatListRef = useRef(null);
 
-  useEffect(() => {
-    chatListRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat]);
+  const patchNewChatRoom = async () => {
+    const res = await createChatRoom();
+    setChatRoomId(res.aiChatRoomId);
+  }
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !isComposing) {
@@ -114,15 +119,26 @@ const AiChat = () => {
     setValue("")
   }
 
+  useEffect(() => {
+    chatListRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
+
+  useEffect(() => {
+    patchNewChatRoom();
+  }, []);
+
+  useEffect(() => {
+    refetch();
+  }, [chatData])
+
   return (
     <div>
       <div className="flex flex-col h-screen">
         <AppBar/>
         <div className="flex-1 overflow-y-auto">
-          <ChatList chat={chat}/>
+          <ChatList historyList={chatData?.historyList}/>
           <div ref={chatListRef}/>
         </div>
-
         <div className="relative">
           <Input
             value={value}

@@ -15,5 +15,14 @@ export const chatService = {
       }
     )
     return res.data
+  },
+  getAIChat: async ({k, title, movieId, text, aiChatRoomId}) => {
+    const res = await axiosInstance.get(
+      '/api/chats',
+      {
+        params: {k, title, movieId, text, aiChatRoomId}
+      }
+    )
+    return res.data
   }
 }
