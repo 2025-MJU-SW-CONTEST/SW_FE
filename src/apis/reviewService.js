@@ -14,6 +14,20 @@ export const reviewService = {
     )
     return res.data;
   },
+  postCreateReview: async ({title, content, date}) => {
+    const res = await axiosInstance.post(
+      `/api/review/create`,
+      {title, content, date}
+    )
+    return res.data;
+  },
+  putReview: async ({id, title, content}) => {
+    const res = await axiosInstance.put(
+      '/api/review/update',
+      {id, title, content}
+    )
+    return res.data;
+  },
   deleteReview: async ({id}) => {
     const res = await axiosInstance.delete(
       `/api/review/delete/${id}`

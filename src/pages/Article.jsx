@@ -21,7 +21,7 @@ const Article = () => {
 
   const year = parseInt(dayjs(month).format('YYYY'), 10); // 2025 -> 숫자
   const monthNum = parseInt(dayjs(month).format('M'), 10);
-  const selectedDay = dayjs(selectDay).format('YYYY-MM-DD');
+  const selectedDay = selectDay ? dayjs(selectDay).format("YYYY-MM-DD") : undefined;
 
   const {data: monthInfo} = useReviewYear(year, monthNum);
   const {data: dateInfo} = useReviewDate(selectedDay);
@@ -45,7 +45,7 @@ const Article = () => {
         </div>
         <AddButton
           className="bottom-[85px]"
-          onClick={() => navigate("/" + pagePath.ARTICLEEDIT)}
+          onClick={() => navigate("/" + pagePath.ARTICLEEDIT, {state: selectedDay})}
         />
       </ScrollArea>
       <BottomNavigation/>

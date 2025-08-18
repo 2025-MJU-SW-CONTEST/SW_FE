@@ -4,6 +4,8 @@ import Button from "@components/common/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
+import {useLocation} from "react-router-dom";
+import {useCreateReview} from "@hooks/useReviewService.js";
 
 const ArticleEdit = () => {
   const [active, setActive] = useState(false);
@@ -12,9 +14,17 @@ const ArticleEdit = () => {
     content: "",
   });
   const { t } = useTranslation(['backHeader', 'title', 'button']);
+  const {state} = useLocation();
+  const {mutateAsync, isPending} = useCreateReview();
   const navigate = useNavigate();
 
   const isActive = value.title && value.content;
+
+
+  const handleOnComplete = async () => {
+    if(isPending) return null;
+    await mutateAsync({...value, date: state});
+  }
   return (
     <div className="h-screen flex flex-col">
       <BackHeader
@@ -47,7 +57,7 @@ const ArticleEdit = () => {
 
       {/* 버튼 영역 */}
       <div className="px-[49px] py-[37px]">
-        <Button type="emphasis" isActive={isActive} text={t("button:button_complete")}/>
+        <Button type="emphasis" onClick={handleOnComplete} isActive={isActive} text={t("button:button_complete")}/>
       </div>
     </div>
   );
