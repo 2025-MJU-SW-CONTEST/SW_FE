@@ -18,7 +18,7 @@ const MypageButtons = ({
     <div className="flex flex-col">
       <button
         type="button"
-        className="flex items-center justify-between pt-10 pb-5 bg-white pretendard_bold text-016 text-font-700"
+        className="flex items-center justify-between pt-10 pb-5 bg-white pretendard_bold text-016 text-font-700 cursor-pointer"
         onClick={onViewInterpretations}
       >
         <div className="flex">
@@ -30,7 +30,7 @@ const MypageButtons = ({
 
       <button
         type="button"
-        className="flex items-center justify-between py-5 bg-white pretendard_bold text-016 text-font-700"
+        className="flex items-center justify-between py-5 bg-white pretendard_bold text-016 text-font-700 cursor-pointer"
         onClick={onChangeNickname}
       >
         <div className="flex">
@@ -42,7 +42,7 @@ const MypageButtons = ({
 
       <button
         type="button"
-        className="flex items-center justify-between py-5 bg-white pretendard_bold text-016 text-font-700"
+        className="flex items-center justify-between py-5 bg-white pretendard_bold text-016 text-font-700 cursor-pointer"
         onClick={onLogout}
       >
         <div className="flex">
@@ -54,7 +54,7 @@ const MypageButtons = ({
 
       <button
         type="button"
-        className="flex items-center justify-between py-5 bg-white pretendard_bold text-016 text-error-font"
+        className="flex items-center justify-between py-5 bg-white pretendard_bold text-016 text-error-font cursor-pointer"
         onClick={onWithdraw}
       >
         <div className="flex">
