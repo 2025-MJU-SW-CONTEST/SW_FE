@@ -1,4 +1,7 @@
 {
   "popup_delete": "감상평이 삭제되었습니다.",
-  "popup_sign_up": "회원가입이 완료되었습니다."
+  "popup_sign_up": "회원가입이 완료되었습니다.",
+  "popup_complete_article": "감상평 작성이 완료되었어요",
+  "popup_edit_article": "감상평 수정이 완료되었어요",
+  "popup_delete_article": "작성한 감상을 삭제했어요"
 }
