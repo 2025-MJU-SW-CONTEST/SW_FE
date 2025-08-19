@@ -5,7 +5,7 @@ const ToastMessage = ({ message, duration = 3000, onClose, className }) => {
     if (!message) return;
 
     const timer = setTimeout(() => {
-      onClose();
+      if (typeof onClose === "function") onClose();
     }, duration);
 
     return () => clearTimeout(timer);
