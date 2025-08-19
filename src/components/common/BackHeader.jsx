@@ -3,7 +3,11 @@ import BackButton from "@/components/common/BackButton";
 const BackHeader = ({ label, onBack }) => {
   return (
     <header className="flex items-center px-7.5 pt-4.5 rounded-b-010 pb-4.5 shadow-md shadow-bottom-neutral-200 ">
-      <BackButton variant="icon" onClick={onBack} className="mr-1" />
+      <BackButton
+        variant="icon"
+        onClick={onBack}
+        className="mr-1 cursor-pointer"
+      />
       <div className="pretendard_bold text-020 leading-7.5">{label}</div>
     </header>
   );

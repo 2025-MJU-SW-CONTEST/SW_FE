@@ -53,8 +53,6 @@ const OAuthCallback = () => {
           dto = {};
         }
 
-        console.log("백엔드 DTO:", dto, "AuthHeader:", authHeader);
-
         const isRegistered =
           (dto.isRegistered ?? dto.registered ?? false) === true;
 
