@@ -30,7 +30,7 @@ const Home = () => {
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const listLoadingRef = useRef(false);
-  console.log(items);
+
   // 검색 상태(서버 페이징)
   const [isSearching, setIsSearching] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");

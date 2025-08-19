@@ -53,8 +53,6 @@ const OAuthCallback = () => {
           dto = {};
         }
 
-        console.log("백엔드 DTO:", dto, "AuthHeader:", authHeader);
-
         const isRegistered =
           (dto.isRegistered ?? dto.registered ?? false) === true;
 
@@ -94,7 +92,7 @@ const OAuthCallback = () => {
             profileUrl: dto.profileUrl ?? null,
           },
         });
-        localStorage.setItem("isLogin", true)
+        localStorage.setItem("isLogin", true);
         return navigate("/", { replace: true });
       } catch (e) {
         console.error("OAuthCallback 처리 중 오류:", e);
