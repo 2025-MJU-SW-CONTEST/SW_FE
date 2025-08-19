@@ -67,6 +67,10 @@ const MyNicknameChange = () => {
     await mutateAsync({ nickname: trimmed });
   };
 
+  const handleValueChange = (next) => {
+    setValue(next.length <= 11 ? next : next.slice(0, 11));
+  };
+
   return (
     <div className=" flex flex-col h-screen">
       <BackHeader
@@ -78,7 +82,7 @@ const MyNicknameChange = () => {
           <TextField
             placeholder={t("placeholder:placeholder_nickname")}
             value={value}
-            setValue={setValue}
+            setValue={handleValueChange}
             setIsActive={setIsActiveFromField}
           />
         </div>
