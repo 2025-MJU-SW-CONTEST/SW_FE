@@ -17,6 +17,7 @@ const BottomNavigation = () => {
             Icon={HomeIcon}
             href={"/"}
             text={t("navigation_home")}
+            isAlsoActive={(pathname) => /^\/movies\/[^/]+/.test(pathname)}
           />
           <BottomNavigationItem
             Icon={RobotIcon}
