@@ -3,23 +3,48 @@ import TextField from "@components/common/TextField.jsx";
 import Button from "@components/common/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useCreateReview, usePutReview} from "@hooks/useReviewService.js";
+import useArticle from "@store/useArticle.js";
 
 const ArticleEdit = () => {
   const [active, setActive] = useState(false);
+
   const [value, setValue] = useState({
     title: "",
     content: "",
   });
+
   const { t } = useTranslation(['backHeader', 'title', 'button']);
+  const {mutateAsync: createArticle, isPending} = useCreateReview();
+  const {mutateAsync: postArticle} = usePutReview()
   const navigate = useNavigate();
 
   const isActive = value.title && value.content;
+
+  const selectedDay = useArticle((state) => state.selectedDay);
+  const articles = useArticle((state) => state.articles);
+
+  const handleOnComplete = async () => {
+    if(isPending) return null;
+    if(selectedDay) await createArticle({...value, date: selectedDay});
+    else await postArticle({...value,id: articles.id})
+  }
+
+  useEffect(() => {
+    if (articles) {
+      setValue({
+        title: articles.title || "",
+        content: articles.content || "",
+      });
+    }
+  }, [articles]);
+
   return (
     <div className="h-screen flex flex-col">
       <BackHeader
         onBack={() => navigate(-1)}
-        label={t('backHeader:backHeader_writeReview')}
+        label={selectedDay ? t('backHeader:backHeader_writeReview') : t('backHeader:backHeader_editReview')}
       />
       <div className="flex-1 overflow-auto px-5 mt-[23px]">
         <p className="pl-3 font-family-pretendard text-016 font-bold text-font-800 leading-normal tracking-wide">
@@ -47,7 +72,7 @@ const ArticleEdit = () => {
 
       {/* 버튼 영역 */}
       <div className="px-[49px] py-[37px]">
-        <Button type="emphasis" isActive={isActive} text={t("button:button_complete")}/>
+        <Button type="emphasis" onClick={handleOnComplete} isActive={isActive} text={t("button:button_complete")}/>
       </div>
     </div>
   );

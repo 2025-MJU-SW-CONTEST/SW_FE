@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
 
-const HashtagList = ({ hashtags }) => {
+const HashtagList = ({ hashtags, className = "" }) => {
   const { t } = useTranslation(["description"]);
-  if (!hashtags || !Array.isArray(hashtags)) return null;
+
+  if (!Array.isArray(hashtags) || hashtags.length === 0) return null;
 
   return (
     <div className="flex flex-col gap-2">
@@ -10,12 +11,12 @@ const HashtagList = ({ hashtags }) => {
         {t("description:description_hashtag")}
       </div>
       <div className="flex flex-wrap gap-2">
-        {hashtags.map((tag) => (
+        {hashtags.map((tag, idx) => (
           <div
-            key={tag}
+            key={`${String(tag)}-${idx}`}
             className="flex items-center justify-center h-8 px-3 py-1.5 rounded-lg border border-primary text-primary-700 text-014 leading-5"
           >
-            #{tag}
+            {String(tag)}
           </div>
         ))}
       </div>

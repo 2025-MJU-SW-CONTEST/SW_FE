@@ -1,3 +1,13 @@
 {
-  "popup_delete": "감상평이 삭제되었습니다."
+  "popup_delete": "감상평이 삭제되었습니다.",
+  "popup_sign_up": "회원가입이 완료되었습니다.",
+  "popup_complete_article": "감상평 작성이 완료되었어요",
+  "popup_edit_article": "감상평 수정이 완료되었어요",
+  "popup_delete_article": "작성한 감상을 삭제했어요",
+  "popup_toast_01": "해석 작성이 완료되었어요.",
+  "popup_toast_02": "작성한 해석을 삭제했어요.",
+  "popup_toast_03": "해석 수정이 완료되었어요.",
+  "popup_toast_04": "감상평 작성이 완료되었어요.",
+  "popup_toast_05": "작성한 감상평을 삭제했어요.",
+  "popup_toast_06": "감상평 수정이 완료되었어요."
 }

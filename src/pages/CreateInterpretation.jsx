@@ -1,14 +1,19 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useMutation } from "@tanstack/react-query";
+import {
+  createAnalysis,
+  mapAnalysis,
+  getAnalysisById,
+} from "@/apis/analysisService";
 import Button from "@components/common/Button.jsx";
 import BackHeader from "@/components/common/BackHeader";
 import InterpretationInput from "@/components/home/InterpretationInput";
 
 const CreateInterpretation = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const movieId = id;
+  const { id: movieId } = useParams();
   const { t } = useTranslation([
     "backheader",
     "button",
@@ -17,45 +22,88 @@ const CreateInterpretation = () => {
   ]);
 
   const minChars = 50;
+  const maxChars = 1000;
+
   const [content, setContent] = useState("");
   const [isActive, setIsActive] = useState(false);
 
-  const handleCompleteButton = () => {
-    if (!isActive) {
-      return;
+  const timerRef = useRef(null);
+  const tickRef = useRef(null);
+
+  const trimmed = useMemo(() => content.trim(), [content]);
+
+  async function waitHashtagsReady(
+    analysisId,
+    { attempts = 5, interval = 1000 } = {}
+  ) {
+    for (let i = 0; i < attempts; i += 1) {
+      try {
+        const dto = await getAnalysisById(analysisId);
+        const mapped = mapAnalysis(dto);
+        if (Array.isArray(mapped.hashtags) && mapped.hashtags.length > 0) {
+          return mapped;
+        }
+      } catch (e) {}
+      await new Promise((r) => setTimeout(r, interval));
     }
+    return null;
+  }
+
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: ({ text }) => createAnalysis({ movieId, content: text }),
+    onSuccess: async (dto) => {
+      const id = dto?.analysis_id;
+      // 0.8~1초 간격으로 최대 5회 재시도(총 4~5초)
+      const ready = id
+        ? await waitHashtagsReady(id, { attempts: 5, interval: 1000 })
+        : null;
+
+      // 상세로 이동: 해석 탭 열고 리로드
+      navigate(`/movies/${movieId}`, {
+        replace: true,
+        state: {
+          openTab: "interpretation",
+          forceReload: true,
+          showCreateToast: true,
+        },
+      });
+    },
+    onError: (err) => {
+      console.error("[analysis:create:error]", err);
+      alert("해석 등록에 실패했어요. 잠시 후 다시 시도해 주세요.");
+    },
+  });
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+      if (tickRef.current) {
+        clearInterval(tickRef.current);
+        tickRef.current = null;
+      }
+    };
+  }, []);
+
+  const handleCompleteButton = async () => {
     if (!movieId) {
       console.error("movieId가 없습니다.");
       return;
     }
-    try {
-      // 예: POST /api/movies/:movieId/interpretations
-      // const res = await fetch(`/api/movies/${movieId}/interpretations`, {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ content: content.trim() }),
-      // });
-      // if (!res.ok) throw new Error("서버 에러");
-      // const newInterpretation = await res.json();
 
-      // --- 현재는 API 없으니 mock 새 항목 생성(테스트용) ---
-      const newInterpretation = {
-        id: Date.now(), // 임시 id
-        content: content.trim(),
-        author: {
-          id: 101,
-          nickname: "현재 사용자",
-          profileUrl: "https://randomuser.me/api/portraits/women/65.jpg",
-        },
-        createdAt: new Date().toISOString(),
-        hashtags: ["테스트"],
-      };
+    if (!isActive || trimmed.length < minChars) return;
 
-      navigate(`/movies/${movieId}`, { state: { newInterpretation } });
-    } catch (err) {
-      console.error("해석 제출 실패", err);
+    if (trimmed.length > maxChars) {
+      alert(`해석은 최대 ${maxChars}자까지 입력할 수 있어요.`);
+      return;
     }
+
+    await mutateAsync({ text: trimmed });
   };
+
+  const canSubmit = isActive && !isPending && trimmed.length <= maxChars;
 
   return (
     <div className="flex flex-col h-screen">
@@ -69,6 +117,7 @@ const CreateInterpretation = () => {
           onChange={setContent}
           placeholder={t("placeholder:placeholder_interpretation")}
           minChars={minChars}
+          maxChars={maxChars}
           onValidityChange={setIsActive}
         />
         <div className="w-full px-12.5 pb-[49px] mt-auto">
@@ -76,7 +125,7 @@ const CreateInterpretation = () => {
             text={t("button:button_complete")}
             type="emphasis"
             onClick={handleCompleteButton}
-            isActive={isActive}
+            isActive={canSubmit}
           />
         </div>
       </div>
