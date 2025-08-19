@@ -56,6 +56,10 @@ const routes = [
         element: <Article />,
       },
       {
+        path: pagePath.ARTICLECREATE,
+        element: <ArticleEdit />,
+      },
+      {
         path: pagePath.ARTICLEEDIT,
         element: <ArticleEdit />,
       },

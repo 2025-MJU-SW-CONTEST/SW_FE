@@ -1,12 +1,12 @@
 import KebabMenu from "@components/common/KebabMenu.jsx";
 import {useTranslation} from "react-i18next";
 
-const Content = ({title, description}) => {
+const Content = ({title, description, onClickEdit, onClickDelete}) => {
   const {t } = useTranslation(['title']);
   return (
     <div className="bg-secondary-50 min-h-48 rounded-010 relative p-020">
       <div className="absolute w-[5px] h-6 right-8 top-5 cursor-pointer" >
-        <KebabMenu menuMargin="mr-3"/>
+        <KebabMenu menuMargin="mr-3" onEdit={onClickEdit} onDelete={onClickDelete}/>
       </div>
       <div className="absolute w-2 h-full bg-primary top-0 "/>
       <div className="pl-[41px]">

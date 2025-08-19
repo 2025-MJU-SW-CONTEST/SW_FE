@@ -4,6 +4,7 @@ import {useToast} from "@store/useToast.js";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {pagePath} from "@routes/pagePath.js";
+import {t} from "i18next";
 export const useReviewYear = (year, month) => {
   return useQuery({
     queryFn: () => reviewService.getMonthReview({year,month}),
@@ -35,13 +36,13 @@ export const useCreateReview = () => {
   })
 }
 
-export const usePutReview = (id, title, content) => {
+export const usePutReview = () => {
   const navigate = useNavigate();
   const {t} = useTranslation(['popup']);
   const {showToast} = useToast();
 
   return useMutation({
-    mutationFn: () => reviewService.putReview({id, title, content}),
+    mutationFn: ({id, title, content}) => reviewService.putReview({id, title, content}),
     onSuccess: () => {
       showToast(`${t("popup_edit_article")}`)
       navigate("/"+pagePath.ARTICLE);
@@ -52,12 +53,14 @@ export const usePutReview = (id, title, content) => {
   })
 }
 
-export const useDeleteReview = (id) => {
+export const useDeleteReview = () => {
   const queryClient = useQueryClient();
+  const {t} = useTranslation(['popup']);
   const {showToast} = useToast();
   return useMutation({
-    mutationFn: () => reviewService.deleteReview({id}),
+    mutationFn: ({id}) => reviewService.deleteReview({id}),
     onSuccess: () => {
+      showToast(`${t("popup_delete_article")}`)
       queryClient.invalidateQueries({
         queryKey: ['review'],
         exact: true,
