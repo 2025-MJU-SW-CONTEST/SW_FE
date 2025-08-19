@@ -55,7 +55,7 @@ const MovieSearch = ({ onSearch }) => {
         <button
           type="button"
           onClick={handleClear}
-          className="ml-[10.5px] focus:outline-none"
+          className="ml-[10.5px] focus:outline-none cursor-pointer"
         >
           <SearchClearIcon />
         </button>
@@ -63,7 +63,7 @@ const MovieSearch = ({ onSearch }) => {
         <button
           type="button"
           onClick={handleSearch}
-          className="ml-[10.5px] focus:outline-none"
+          className="ml-[10.5px] focus:outline-none cursor-pointer"
         >
           <SearchIcon />
         </button>
