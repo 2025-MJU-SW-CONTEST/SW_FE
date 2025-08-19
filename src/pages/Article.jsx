@@ -8,16 +8,51 @@ import ScrollArea from "@components/common/ScrollArea.jsx";
 
 import {pagePath} from "@routes/pagePath.js";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useDeleteReview, useReviewYear} from "@hooks/useReviewService.js";
+import {useReviewDate} from "@hooks/useReviewService.js";
 
-const dummyData = ["2025-08-13", "2025-08-15"]
+import useArticle from "@store/useArticle.js";
+import dayjs from "dayjs";
 
 const Article = () => {
   const [selectDay, setSelectDay] = useState(null);
-  const modifiers =  dummyData.map(dateStr => new Date(dateStr))
+  const [month, setMonth] = useState(new Date());
 
+  const year = parseInt(dayjs(month).format('YYYY'), 10); // 2025 -> 숫자
+  const monthNum = parseInt(dayjs(month).format('M'), 10);
+  const selectedDay = selectDay ? dayjs(selectDay).format("YYYY-MM-DD") : undefined;
+
+  const setArticles = useArticle((state) => state.setArticles);
+  const setSelectedDay = useArticle((state) => state.setSelectedDay);
+
+  const {data: monthInfo, refetch: refecthMonth} = useReviewYear(year, monthNum);
+  const {data: dateInfo, refetch: refecthDate} = useReviewDate(selectedDay);
+  const {mutateAsync, isPending} = useDeleteReview()
+
+  const modifiers =  monthInfo?.map(dateStr => new Date(dateStr))
   const navigate = useNavigate();
 
+  const handleEdit = (idx) => {
+    setSelectedDay("")
+    setArticles(dateInfo[idx])
+    navigate("/" + pagePath.ARTICLEEDIT);
+  }
+
+  const handleDelete = async (id) => {
+    if(isPending) return;
+    await mutateAsync({id});
+  }
+
+  const handleAdd = () => {
+    setSelectedDay(selectedDay)
+    navigate("/" + pagePath.ARTICLECREATE);
+  }
+
+  useEffect(() => {
+    refecthDate();
+    refecthMonth();
+  }, [handleDelete])
 
   return (
     <div>
@@ -26,15 +61,31 @@ const Article = () => {
           <CustomCalendar
             modifiers={modifiers}
             selectedDay={selectDay}
-            setSelectedDay={setSelectDay}
+            setSelectedDay={(day) => {
+              setSelectDay(day)
+
+            }}
+            setMonthProps={setMonth}
           />
           <Divider className="mt-[33px]"/>
-          {/*<div className="px-016 mt-[17px]"><Content/></div>*/}
-          <Blank type={selectDay ? "article": "date"}/>
+          {dateInfo?.length > 0 ?
+            <div className="px-016 mt-[17px] flex flex-col gap-5">
+              {dateInfo?.map((item,idx) => (
+                  <Content
+                    key={idx}
+                    onClickDelete={() => handleDelete(item?.id)}
+                    onClickEdit={() => handleEdit(idx)}
+                    title={item?.title}
+                    description={item?.content}
+                  />
+                ))}
+            </div>
+            :  <Blank type={selectDay ? "article": "date"}/>
+          }
         </div>
         <AddButton
           className="bottom-[85px]"
-          onClick={() => navigate("/" + pagePath.ARTICLEEDIT)}
+          onClick={handleAdd}
         />
       </ScrollArea>
       <BottomNavigation/>
