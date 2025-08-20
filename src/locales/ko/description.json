@@ -16,5 +16,6 @@
   "description_modal_02": "회원탈퇴시 모든 정보는 삭제되며, 같은 아이디로 재가입시 작성한 데이터는 복원되지 않습니다.",
   "description_hashtag": "필리가 뽑은 해시태그",
   "description_calendar_01": "날짜를 선택해주세요",
-  "description_calendar_02": "감상평이 없어요.\n +버튼을 눌러 감상평을 적어보세요!"
+  "description_calendar_02": "감상평이 없어요.\n +버튼을 눌러 감상평을 적어보세요!",
+  "description_input_loading": "필리가 질문내용을 분석중이에요..."
 }
