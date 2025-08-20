@@ -10,6 +10,7 @@ import Register from "@pages/Register.jsx";
 import Home from "@pages/Home.jsx";
 import AIChat from "@pages/AIChat.jsx";
 import Article from "@pages/Article.jsx";
+import ArticleEdit from "@pages/ArticleEdit.jsx";
 import Mypage from "@pages/Mypage.jsx";
 import OAuthCallback from "@/pages/OAuthCallback";
 import MovieDetailPage from "@/pages/MovieDetailPage";
@@ -36,8 +37,31 @@ const routes = [
         element: <Register />,
       },
       {
+        path: pagePath.OAUTH_CALLBACK_KAKAO,
+        element: <OAuthCallback />,
+      },
+
+    ],
+  },
+  {
+    path: "/",
+    element: <ProtectedRoute />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
         path: pagePath.ARTICLE,
         element: <Article />,
+      },
+      {
+        path: pagePath.ARTICLECREATE,
+        element: <ArticleEdit />,
+      },
+      {
+        path: pagePath.ARTICLEEDIT,
+        element: <ArticleEdit />,
       },
       {
         path: pagePath.AICHAT,
@@ -46,10 +70,6 @@ const routes = [
       {
         path: pagePath.MYPAGE,
         element: <Mypage />,
-      },
-      {
-        path: pagePath.OAUTH_CALLBACK_KAKAO,
-        element: <OAuthCallback />,
       },
       {
         path: pagePath.MOVIE_DETAIL,
@@ -70,16 +90,6 @@ const routes = [
       {
         path: pagePath.EDIT_INTERPRETATION,
         element: <EditInterpretation />,
-      },
-    ],
-  },
-  {
-    path: "/",
-    element: <ProtectedRoute />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
       },
     ],
   },

@@ -5,6 +5,8 @@ export const pagePath = {
   HOME: "home",
   AICHAT: "aichat",
   ARTICLE: "article",
+  ARTICLEEDIT: 'article_edit',
+  ARTICLECREATE: 'article_create',
   MYPAGE: "mypage",
   OAUTH_CALLBACK_KAKAO: "/oauth/callback/kakao",
   MOVIE_DETAIL: "/movies/:id",

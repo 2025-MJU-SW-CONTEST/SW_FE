@@ -2,19 +2,19 @@ import TextField from "@components/common/TextField.jsx";
 import Button from "@components/common/Button.jsx";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useRegister} from "@hooks/useAuthService.js";
+import {useLocation} from "react-router-dom";
 
 const Register = () => {
-  const [value, setValue] = useState("");
+  const location = useLocation();
+
+  const [nickname, setNickname] = useState("");
   const [isActive, setIsActive] = useState(false);
-  const navigate = useNavigate();
 
   const { t } = useTranslation(["title", "description","placeholder", "button"]);
-
-  const handleCompleteButton = () => {
-    localStorage.setItem("isLogin", true);
-    localStorage.setItem("accessToken", "filmmateo02030404");
-    navigate("/");
+  const {mutateAsync} = useRegister();
+  const handleCompleteButton = async () => {
+    await mutateAsync({ ...location.state, nickname: nickname});
   }
 
   return (
@@ -27,10 +27,10 @@ const Register = () => {
       <div className="px-022 mt-[35px]">
         <TextField
           placeholder={t("placeholder:placeholder_nickname")}
-          value={value}
-          setValue={(value) => {
-            if(value.length <= 11){
-              setValue(value);
+          value={nickname}
+          setValue={(val) => {
+            if(val.length <= 11){
+              setNickname(val);
             }
           }}
           setIsActive={setIsActive}

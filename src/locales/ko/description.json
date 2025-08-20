@@ -4,15 +4,18 @@
   "description_special_nickname": "특수기호 !@#$%^&*()는 입력할 수 없어요.",
   "description_search_count": "검색결과 : {{count}}건",
   "description_no_search_results": "해당 검색어에 해당하는 \n영화를 찾을 수 없어요!",
+  "description_no_contents": "해당 영화 정보를 불러올 수 없습니다.",
+  "description_no_summary": "해당 영화의 줄거리 정보가 없어요.",
+  "description_no_cast": "해당 영화의 출연진 정보가 없어요.",
   "description_no_interpretation": "아직 등록된 해석이 없어요. \n+ 를 눌러 해석을 작성해보세요!",
+  "description_no_my_interpretation": "아직 등록한 해석이 없어요.",
   "description_interpretation_count": " 총 {{count}}건의 해석이 있어요.",
   "description_interpretation_announcement": "작성한 해석을 바탕으로 필리가 해시태그를 추천해드려요!",
   "description_interpretation_caution": "해석은 50자 이상 작성해주세요.",
   "description_modal_01": "정말로 회원탈퇴를 하시겠습니까?",
   "description_modal_02": "회원탈퇴시 모든 정보는 삭제되며, 같은 아이디로 재가입시 작성한 데이터는 복원되지 않습니다.",
   "description_hashtag": "필리가 뽑은 해시태그",
-  "description_toast_01": "해석 작성이 완료되었어요.",
-  "description_toast_02": "작성한 해석을 삭제했어요.",
-  "description_toast_03": "감상평 작성이 완료되었어요.",
-  "description_toast_04": "작성한 감상평을 삭제했어요."
+  "description_calendar_01": "날짜를 선택해주세요",
+  "description_calendar_02": "감상평이 없어요.\n +버튼을 눌러 감상평을 적어보세요!",
+  "description_input_loading": "필리가 질문내용을 분석중이에요..."
 }

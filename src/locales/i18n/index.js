@@ -27,7 +27,7 @@ i18n.use(initReactI18next).init({
   },
   lng: "ko", // 기본 언어
   fallbackLng: "ko",
-  ns: ["button", "navigation", "backheader"], // 네임스페이스 추가
+  ns: ["button", "description","onboarding", "navigation","placeholder","title","popup", "list", "backheader"], // 네임스페이스 추가
   defaultNS: "button",
   interpolation: {
     escapeValue: false, // React는 XSS 방지 처리됨
