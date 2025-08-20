@@ -7,6 +7,13 @@ export const chatService = {
     )
     return res.data
   },
+  postAIChat: async ({k, title, movieId, text, aiChatRoomId}) => {
+    const res = await axiosInstance.post(
+      `/api/chats/${aiChatRoomId}`,
+      {k, title, movieId, text, aiChatRoomId}
+    )
+    return res.data
+  },
   getAIChatRoomsHistory: async ({id, page, size}) => {
     const res = await axiosInstance.get(
       `/api/aiChatRooms/${id}/history`,
@@ -16,13 +23,11 @@ export const chatService = {
     )
     return res.data
   },
-  getAIChat: async ({k, title, movieId, text, aiChatRoomId}) => {
+  getRecentAIChatRoom: async () => {
     const res = await axiosInstance.get(
-      '/api/chats',
-      {
-        params: {k, title, movieId, text, aiChatRoomId}
-      }
+      '/api/aiChatRooms/recent'
     )
-    return res.data
-  }
+    return res.data;
+  },
+
 }

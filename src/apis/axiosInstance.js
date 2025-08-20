@@ -4,7 +4,7 @@ import useAuth from "@store/useAuth.js";
 export const axiosInstance = axios.create({
   withCredentials: true,
   baseURL: import.meta.env.VITE_API_BASE_URL,
-  timeout: 10000,
+  timeout: 90000,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
