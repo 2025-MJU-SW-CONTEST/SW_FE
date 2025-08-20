@@ -4,7 +4,6 @@ import clsx from "clsx";
 import {useTranslation} from "react-i18next";
 
 const Input = ({className, placeholder, value, setValue, onEnter, onClickButton, handleComposition, isLoading}) => {
-  console.log(isLoading)
   const {t} = useTranslation()
   return (
     <div className={clsx(

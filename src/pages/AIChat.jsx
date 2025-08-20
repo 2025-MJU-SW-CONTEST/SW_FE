@@ -122,15 +122,14 @@ const AiChat = () => {
   const handleSubmit = async () => {
     setValue("");
     if (localStorage.getItem("isSuccess") === "false") {
+      setIsHistoryFetch(true);
       const res = await postChat({
         k: parseInt(localStorage.getItem("tryNum")),
         title: value,
         aiChatRoomId: chatRoomId,
       });
       if (isSuccessPost) {
-        console.log(res)
         localStorage.setItem("movieId", res.movieId);
-        setIsHistoryFetch(true);
         await refetchHistory();
         setIsHistoryFetch(false);
         // 새 메시지 전송 후 맨 아래로 스크롤
@@ -190,7 +189,7 @@ const AiChat = () => {
 
   useEffect(() => {
     if (getRecentSuccess) {
-      getRecent ? setChatRoomId(getRecent.aiChatRoomId) : patchNewChatRoom();
+      getRecent.aiChatRoomId !== 0 ? setChatRoomId(getRecent.aiChatRoomId) : patchNewChatRoom();
     }
   }, [getRecentSuccess, getRecent]);
 
@@ -211,7 +210,6 @@ const AiChat = () => {
     });
 
     // 스크롤 컨테이너 참조 확인
-    console.log("Scroll container ref:", scrollContainerRef.current);
     if (scrollContainerRef.current) {
       console.log("Scroll container dimensions:", {
         scrollHeight: scrollContainerRef.current.scrollHeight,
