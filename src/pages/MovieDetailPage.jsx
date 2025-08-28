@@ -33,6 +33,11 @@ const MovieDetailPage = ({ onChat }) => {
 
   const [tabReloadKey, setTabReloadKey] = useState(0);
 
+  console.log(movie)
+  const handleClickChat = () => {
+    navigate(`/chat/${movieId}`, {state: {id: movieId, title: movie?.title}});
+  }
+
   // 서버 응답
   const mapDetail = (d) => {
     const raw = d?.movieCasts?.cast ?? [];
@@ -171,7 +176,7 @@ const MovieDetailPage = ({ onChat }) => {
               </div>
               <CastList cast={movie.cast || []} />
             </div>
-            <ChatButton onClick={onChat} />
+            <ChatButton onClick={handleClickChat} />
           </div>
         ) : (
           <MovieInterpretationTab

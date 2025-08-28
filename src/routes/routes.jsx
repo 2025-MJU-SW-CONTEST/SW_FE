@@ -9,6 +9,7 @@ import Login from "@pages/Login.jsx";
 import Register from "@pages/Register.jsx";
 import Home from "@pages/Home.jsx";
 import AIChat from "@pages/AIChat.jsx";
+import Chat from "@pages/Chat.jsx";
 import Article from "@pages/Article.jsx";
 import ArticleEdit from "@pages/ArticleEdit.jsx";
 import Mypage from "@pages/Mypage.jsx";
@@ -62,6 +63,10 @@ const routes = [
       {
         path: pagePath.ARTICLEEDIT,
         element: <ArticleEdit />,
+      },
+      {
+        path: pagePath.CHAT,
+        element: <Chat />,
       },
       {
         path: pagePath.AICHAT,
