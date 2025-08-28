@@ -76,6 +76,7 @@ export const useGetChatBeforeHistory = ({roomId, chatId}) => {
   return useQuery({
     queryFn: () => chatService.getChatBeforeHistory({roomId, chatId}),
     queryKey: ["chatBeforeHistory"],
+    enabled: !!chatId,
     staleTime: 60 * 1000,
     retry: 1,
   })

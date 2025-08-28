@@ -13,32 +13,45 @@ import { useEffect, useRef, useState } from "react";
 const Chat = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const stompClient = useRef(null);
   const movieId = location.state.id;
-
-  const { t } = useTranslation(["description", "placeholder"]);
-  const { data: chatHistory, refetch } = useGetChatHistory({ roomId: movieId });
-  const { data: chatBeforHistory } = useGetChatBeforeHistory({
-    roomId: movieId,
-    chatId: "68ad98fbcd9619313b322a7d",
-  });
-
-  const { accessToken, userInfo } = useAuth.getState();
-  const [message, setMessage] = useState("");
-  const [isComposing, setIsComposing] = useState(false);
-
+  const stompClient = useRef(null);
   const messagesEndRef = useRef(null);
 
+  const [message, setMessage] = useState("");
+  const [isComposing, setIsComposing] = useState(false);
+  const [chattingHistory, setChattingHistory] = useState([]);
+  const [lastChatId, setLastChatId] = useState("");
+
+  const { t } = useTranslation(["description", "placeholder"]);
+  const {data: chatHistory, refetch } = useGetChatHistory({ roomId: movieId });
+  const {data: chatBeforeHistory} = useGetChatBeforeHistory({roomId: movieId, chatId: lastChatId});
+  const { accessToken, userInfo } = useAuth.getState();
+
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if(lastChatId && chatBeforeHistory?.length > 0){
+      setChattingHistory((prev) => {
+        const ids = new Set(prev.map(m => m.id));
+        const newHist = chatBeforeHistory.filter(m => !ids.has(m.id));
+        return [...prev, ...newHist];
+      });
+    } else{
+      setChattingHistory([])
     }
-  }, [chatHistory]);
+  }, [chatBeforeHistory, lastChatId]);
 
   useEffect(() => {
-    refetch();
-  }, [movieId]);
+    if (chatHistory && !lastChatId) {
+      setChattingHistory((prev) => {
+        const ids = new Set(prev.map((m) => m.id));
+        const newHist = chatHistory.filter((m) => !ids.has(m.id));
+        return [...prev, ...newHist];
+      });
+    } else{
+      setChattingHistory([])
+    }
+  }, [chatHistory, lastChatId]);
 
+  // STOMP WebSocket 연결
   useEffect(() => {
     const socket = new SockJS(`${import.meta.env.VITE_API_BASE_URL}/ws-chat`);
     const client = new Client({
@@ -47,10 +60,14 @@ const Chat = () => {
       debug: (str) => console.log("STOMP Debug:", str),
       onConnect: () => {
         console.log("✅ STOMP 연결 성공");
+
         client.subscribe(`/topic/chat/${movieId}`, (frame) => {
-          const body = JSON.parse(frame.body);
-          refetch();
-          console.log(body);
+          const body = { ...JSON.parse(frame.body) }; // 새로운 객체로 생성
+          localStorage.setItem("lastChatId", body.id);
+          setChattingHistory((prev) => {
+            if (prev.find((m) => m.id === body.id)) return prev; // 중복 방지
+            return [body,...prev];
+          });
         });
       },
       onDisconnect: () => console.log("❌ STOMP 연결 종료"),
@@ -59,11 +76,10 @@ const Chat = () => {
     client.activate();
     stompClient.current = client;
 
-    return () => {
-      client.deactivate();
-    };
+    return () => client.deactivate();
   }, [movieId, accessToken]);
 
+  // 메시지 입력 및 전송
   const sendMessage = (msg) => {
     if (stompClient.current && msg.trim() !== "") {
       const chatMessage = {
@@ -82,7 +98,7 @@ const Chat = () => {
     const msg = message.trim();
     if (!msg) return;
     sendMessage(msg);
-    setMessage(""); // 보낸 후 비우기
+    setMessage(""); // 보낸 후 입력창 비우기
   };
 
   const handleKeyDown = (e) => {
@@ -91,6 +107,16 @@ const Chat = () => {
       handleSubmit();
     }
   };
+
+  // 채팅이 업데이트될 때 자동 스크롤
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chattingHistory]);
+
+  // roomId 변경 시 데이터 refetch
+  useEffect(() => {
+    refetch();
+  }, [movieId]);
 
   return (
     <div className="flex flex-col h-screen">
@@ -107,7 +133,7 @@ const Chat = () => {
         className="flex-1 overflow-y-auto px-016 mt-3"
         style={{ height: "calc(100vh - 200px)", minHeight: "400px" }}
       >
-        <ChatList history={chatHistory} myId={userInfo.id} />
+        <ChatList history={chattingHistory} myId={userInfo.id} />
         <div ref={messagesEndRef} />
       </div>
       <div className="relative">
