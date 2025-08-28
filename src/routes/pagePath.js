@@ -4,6 +4,7 @@ export const pagePath = {
   REGISTER: "register",
   HOME: "home",
   AICHAT: "aichat",
+  CHAT: "chat/:movieId",
   ARTICLE: "article",
   ARTICLEEDIT: 'article_edit',
   ARTICLECREATE: 'article_create',

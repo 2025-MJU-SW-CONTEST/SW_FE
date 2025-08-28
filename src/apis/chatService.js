@@ -29,5 +29,24 @@ export const chatService = {
     )
     return res.data;
   },
+  getChatHistory: async ({roomId}) => {
+    const res = await axiosInstance.get(
+      `/api/chat/history/recent/${roomId}`
+    )
+    return res.data;
+  },
+  getChatBeforeHistory: async ({roomId, chatId}) => {
+    const res = await axiosInstance.get(
+      `/api/chat/history/${roomId}/before/${chatId}`
+    )
+    return res.data;
+  },
+  postChatSend: async ({chatRoomId, userId, message, timestamp}) => {
+    const res = await axiosInstance.post(
+      '/api/chat/send',
+      {chatRoomId,userId,message,timestamp}
+    )
+    return res.data;
+  }
 
 }

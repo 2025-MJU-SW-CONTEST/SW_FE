@@ -63,6 +63,38 @@ export const useGetAIChatRoomsHistory = ({ id, page, size = 10 }) => {
   });
 };
 
+export const useGetChatHistory = ({roomId}) => {
+  return useQuery({
+    queryFn: () => chatService.getChatHistory({roomId}),
+    queryKey: ['chatRecentHistory'],
+    staleTime: 60 * 1000,
+    retry: 1,
+  })
+}
+
+export const useGetChatBeforeHistory = ({roomId, chatId}) => {
+  return useQuery({
+    queryFn: () => chatService.getChatBeforeHistory({roomId, chatId}),
+    queryKey: ["chatBeforeHistory"],
+    enabled: !!chatId,
+    staleTime: 60 * 1000,
+    retry: 1,
+  })
+}
+
+export const usePostChat = () => {
+  const { showToast } = useToast();
+  return useMutation({
+    mutationFn: ({ chatRoomId, userId, message, timestamp }) => chatService.postChatSend({ chatRoomId, userId, message, timestamp }),
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (err) => {
+      showToast(err.message);
+    },
+  })
+}
+
 export const useRefetchChatHistory = () => {
   const queryClient = useQueryClient();
 
