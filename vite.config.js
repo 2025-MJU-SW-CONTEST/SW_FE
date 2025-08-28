@@ -9,6 +9,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  define: {
+    global: "window",   // global을 window로 매핑
+  },
   base: '/',
   resolve: {
     alias: {

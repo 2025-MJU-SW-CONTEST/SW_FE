@@ -77,7 +77,7 @@ const ChatList = forwardRef(({ historyList = [], onClickCheckMovie }, ref) => {
                 ) {
                   return null;
                 }
-                const cleanMessage = msg.message.replace(/"/g, "");
+                const cleanMessage = msg.message?.replace(/"/g, "");
                 return (
                   <ChatBubble
                     key={msg.id}

@@ -17,5 +17,7 @@
   "description_hashtag": "필리가 뽑은 해시태그",
   "description_calendar_01": "날짜를 선택해주세요",
   "description_calendar_02": "감상평이 없어요.\n +버튼을 눌러 감상평을 적어보세요!",
-  "description_input_loading": "필리가 질문내용을 분석중이에요..."
+  "description_input_loading": "필리가 질문내용을 분석중이에요...",
+  "description_chat_title": "영화의 깊은 의미와 숨겨진 메시지를 함께 추리하고 토론해보세요!",
+  "description_chat_content": "영화 속 장면이나 등장인물에 숨어 있는 함축된 의미를 함께 추리하며 의견을 나누고, 서로의 다양한 해석을 공유할 수 있는 공간입니다.\n감독의 의도, 상징적인 요소, 감동적인 장면에 대한 자신만의 해석을 펼쳐보세요!\n다양한 관점을 통해 영화를 더 깊이 이해하고, 새로운 통찰을 얻을 수 있습니다."
 }
